@@ -1,0 +1,289 @@
+﻿@{
+	ViewData["Title"] = "ContactUs";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	.contact1 {
+		background-image: url('../bg-img/pic3.jpg');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+</style>
+
+<div class="page-wraper">
+	<!-- header -->
+	<header class="site-header mo-left style-4 header-full header header-transparent">
+		<!-- main header -->
+		<div class="sticky-header main-bar-wraper">
+			<div class="main-bar clearfix ">
+				<div class="header-content-bx">
+					<button class="navbar-toggler collapsed navicon justify-content-end menu-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					<div class="logo-header">
+						<a href="/Home/Index"><h1 style="padding-top:20px;color:white;">EasyVote</h1></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-nav navbar-collapse collapse full-sidenav deznav-scroll">
+			<div class="menu-close">
+				<i class="ti-close"></i>
+			</div>
+			<div class="logo-header">
+			</div><a href="/Home/Index"><h1 style="padding-top:20px;color:white;">EasyVote</h1></a>
+			<ul class="nav navbar-nav">
+				<li class="active"> <a href="/Home/Index">Home</a></li>
+				<li class="sub-menu-down">
+					<a href="javascript:void(0);">Pages</a>
+					<ul class="sub-menu">
+						<li><a href="/Home/About">About Us</a></li>
+						<li><a href="/Home/Team">Team</a></li>
+						</ul>
+				</li>
+				
+				<li class="sub-menu-down">
+					<a href="javascript:void(0);">Services</a>
+					<ul class="sub-menu">
+						<li><a href="/Home/Services">Services</a></li>
+					</ul>
+				</li>
+				<li><a href="/Home/ContactUs">Contact Us</a></li>
+			</ul>
+			<div class="social-menu">
+				<ul>
+					<li><a target="_blank" class="fab fa-facebook-f" href="https://www.facebook.com/"></a></li>
+					<li><a target="_blank" class="fab fa-instagram" href="https://www.instagram.com/"></a></li>
+					<li><a target="_blank" class="fab fa-twitter" href="https://twitter.com/"></a></li>
+					<li><a target="_blank" class="fab fa-youtube" href="https://www.youtube.com/"></a></li>
+				</ul>
+				<p class="copyright-head">© <span class="current-year">2024</span> EasyVote</p>
+			</div>
+		</div>
+		<!-- main header END -->
+	</header>
+	<!-- header END -->
+
+	<div class="page-content bg-white">
+		<!-- Banner  -->
+		<div class="ic-bnr-inr style-1 ic-bnr-inr-md overlay-black-middle contact1">
+			<div class="container">
+				<div class="ic-bnr-inr-entry">
+					<h1>Contact Us</h1>
+					<!-- Breadcrumb Row -->
+					<nav aria-label="breadcrumb" class="breadcrumb-row">
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+							<li class="breadcrumb-item">ContactUs</li>
+						</ul>
+					</nav>
+					<!-- Breadcrumb Row End -->
+				</div>
+			</div>
+		</div>
+		<!-- Banner End -->
+		<!-- Contact Form -->
+		<section class="content-inner">
+			<div class="container">
+				<div class="row align-items-center" style="padding-top:60px;">
+					<div class="col-xl-6 col-lg-6 m-b30">
+						<form class="ic-form style-2 icForm" method="POST" action="script/contact_smtp.php">
+							<input type="hidden" class="form-control" name="icToDo" value="Contact">
+							<div class="icFormMsg"></div>
+							<div class="row sp10">
+								<div class="col-sm-6 m-b20">
+									<div class="input-group">
+										<input type="text" class="form-control" name="icFirstName" placeholder="First Name">
+									</div>
+								</div>
+								<div class="col-sm-6 m-b20">
+									<div class="input-group">
+										<input type="text" class="form-control" name="icLastName" placeholder="Last Name">
+									</div>
+								</div>
+								<div class="col-sm-6 m-b20">
+									<div class="input-group">
+										<input type="text" class="form-control" name="icEmail" placeholder="Email">
+									</div>
+								</div>
+								<div class="col-sm-6 m-b20">
+									<div class="input-group">
+										<input type="number" class="form-control" name="icPhoneNumber" placeholder="Phone No.">
+									</div>
+								</div>
+								<div class="col-sm-12 m-b20">
+									<div class="input-group">
+										<textarea name="icMessage" class="form-control">Message</textarea>
+									</div>
+								</div>
+								<div class="col-sm-12 m-b20">
+									<div class="input-group">
+										<!-- <div class="g-recaptcha" data-sitekey="6LefsVUUAAAAADBPsLZzsNnETChealv6PYGzv3ZN" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div> -->
+										<input class="form-control d-none" style="display:none;" data-recaptcha="true" required data-error="Please complete the Captcha">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<button name="submit" type="submit" value="submit" class="btn btn-secondary" style="border-radius: 30px;">Submit<i class="m-l10 fas fa-caret-right"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-xl-6 col-lg-6">
+						<div class="row">
+							<div class="col-lg-12 m-b30">
+								<div class="icon-bx-wraper style-16 bg-white">
+									<div class="icon-md m-r20">
+										<span class="icon-cell text-primary"><i class="fas fa-phone-alt"></i></span>
+									</div>
+									<div class="icon-content">
+										<h4 class="tilte m-b10">CALL NOW</h4>
+										<p class="m-b0"><a href="tel:+4733378901">+91 123 456 7890, +91 987 654 3210</a></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12 m-b30">
+								<div class="icon-bx-wraper style-16 bg-white">
+									<div class="icon-md m-r20">
+										<span class="icon-cell text-primary"><i class="fas fa-map-marker-alt"></i></span>
+									</div>
+									<div class="icon-content">
+										<h4 class="tilte m-b10">LOCATION</h4>
+										<p class="m-b0"><a href="mailto:someone@example.com">info@gmail.com, services@gmail.com</a></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12 m-b30">
+								<div class="icon-bx-wraper style-16 bg-white">
+									<div class="icon-md m-r20">
+										<span class="icon-cell text-primary"><i class="fas fa-envelope-open-text"></i></span>
+									</div>
+									<div class="icon-content">
+										<h4 class="tilte m-b10">EMAIL NOW</h4>
+										<p class="m-b0">15/B Miranda House, New York, US</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- map-iframe -->
+		<div class="map-iframe style-1 content-inner-1 pt-0">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227748.3825624477!2d75.65046970649679!3d26.88544791796718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57e281%3A0xce1c63a0cf22e09!2sJaipur%2C+Rajasthan!5e0!3m2!1sen!2sin!4v1500819483219" allowfullscreen></iframe>
+		</div>
+
+		<section class="">
+			<div class="container">
+				<div class="row ft-subscribe-wrapper justify-content-center text-center">
+					<div class="col-xl-8">
+						<div class="section-head text-center style-3">
+							<h2 class="title">SUBSCRIBE TO GET LATEST NEWS ABOUT US</h2>
+							<p>We recommended you to subscribe to our newslatter, enter your email below to get daily update about us.</p>
+						</div>
+						<div class="ft-subscribe style-2 aos-item aos-animate" data-aos="fade-up" data-aos-duration="250" data-aos-delay="100">
+							<form class="icSubscribe" method="post">
+								<div class="icSubscribeMsg"></div>
+								<div class="input-group">
+									<input name="icEmail" required="required" type="email" class="form-control" placeholder="Enter Your Email Address">
+									<button name="submit" value="Submit" type="submit" class="btn btn-secondary">
+										<span>SUBSCRIBE NOW </span>
+										<i class="far fa-paper-plane"></i>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+	<!-- Footer -->
+	<footer class="site-footer style-4 overflow-hidden" id="footer">
+		<img src="images/pattern/pt13.png" class="circle-bg" alt="">
+		<img src="images/pattern/pt13.png" class="circle-bg-2" alt="">
+		<div class="footer-top line-img">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-3 aos-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
+						<div class="widget widget_getintuch">
+							<div class="widget-title">
+								<h4 class="title">Contact Us</h4>
+							</div>
+							<ul>
+								<li><i class="flaticon-placeholder"></i>1247/Plot No. 39, 15th Phase,  Colony, Kukatpally, Hyderabad</li>
+								<li><i class="flaticon-phone-call"></i><a href="tel:+4733378901" class="callmailcolor">1800-121-3637<br>+91 555 234-8765</a></li>
+								<li><i class="flaticon-mail"></i><a href="mailto:someone@example.com" class="callmailcolor">info@gmail.com<br>services@gmail.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-6 aos-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+						<div class="widget widget_links p-l50">
+							<div class="widget-title">
+								<h4 class="title">Our Links</h4>
+							</div>
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="about-us.html">About Us</a></li>
+								<li><a href="portfolio.html">Portfolio</a></li>
+								<li><a href="services.html">Services</a></li>
+								<li><a href="team.html">Team</a></li>
+								<li><a href="blog-grid-2-sidebar.html">Blogs</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-6 aos-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+						<div class="widget widget_links">
+							<div class="widget-title">
+								<h4 class="title">Services</h4>
+							</div>
+							<ul>
+								<li><a href="#">Communication</a></li>
+								<li><a href="#">Project Planning</a></li>
+								<li><a href="#">Product Design</a></li>
+								<li><a href="#">Custom Design</a></li>
+								<li><a href="#">24x7 Suppoer</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6 aos-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+						<div class="widget-title">
+							<h4 class="title">About Company</h4>
+						</div>
+						<p>Welcome to EasyVote, your trusted partner in secure and efficient online voting solutions. we are dedicated to revolutionizing the way elections are conducted by providing innovative and reliable e-voting platforms. Our mission is to enhance the democratic process by making voting more accessible, transparent, and secure for everyone.</p>
+						<ul class="social-list style-2">
+							<li><a target="_blank" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+							<li><a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+							<li><a target="_blank" href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-6 text-lg-start">
+						<ul class="footer-link d-inline-block">
+							<li><a href="javascript:void(0);">Privacy Policy</a></li>
+							<li><a href="javascript:void(0);">Team &amp; Condition</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-6 text-lg-end mt-lg-0 mt-2">
+						<span class="copyright-text">Copyright © <span class="current-year">2024</span> <span class="heart"></span> <a href="https://indiankoder.com/portfolio.html" class="text-primary" target="_blank">indiancoder</a> All rights reserved.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer End -->
+	<button class="scroltop icon-up" type="button"><i class="fa fa-arrow-up"></i></button>
+</div>

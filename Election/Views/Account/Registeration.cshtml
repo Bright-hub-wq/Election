@@ -1,0 +1,418 @@
+﻿@model Election.ViewModel.ApplicationUserViewModel;
+
+@{
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<section class="container body1">
+    <header>Voter Registration</header>
+    <form asp-action="Registeration" method="post" class="form" novalidate>
+        <div class="form-row">
+            <input type="hidden" asp-for="Role" value="Voter" />
+
+            <div class="input-box">
+                <label for="FirstName">First Name</label>
+                <input type="text" asp-for="FirstName" placeholder="Enter first name" required />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="input-box">
+                <label for="LastName">Last Name</label>
+                <input type="text" asp-for="LastName" placeholder="Enter last name" required />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="input-box">
+                <label for="Email">Email Address</label>
+                <input type="email" asp-for="Email" placeholder="Enter email address" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="input-box">
+                <label for="PhoneNumber">Phone Number</label>
+                <input type="tel" asp-for="PhoneNumber" placeholder="Enter phone number" required />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="input-box">
+                <label for="Password">Password</label>
+                <input type="password" asp-for="Password" placeholder="Enter password" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="input-box">
+                <label for="ConfirmPassword">Confirm Password</label>
+                <input type="password" asp-for="ConfirmPassword" placeholder="Confirm password" required />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="input-box">
+                <label for="DateOfBirth">Date of Birth</label>
+                <input type="date" asp-for="DateOfBirth" required />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="input-box select-box">
+                <label for="Country">Country</label>
+                <select asp-for="Country" required>
+                    <option hidden>Select Country</option>
+                    <option>Afghanistan</option>
+                    <option>Albania</option>
+                    <option>Algeria</option>
+                    <option>Andorra</option>
+                    <option>Angola</option>
+                    <option>Antigua and Barbuda</option>
+                    <option>Argentina</option>
+                    <option>Armenia</option>
+                    <option>Australia</option>
+                    <option>Austria</option>
+                    <option>Azerbaijan</option>
+                    <option>Bahamas</option>
+                    <option>Bahrain</option>
+                    <option>Bangladesh</option>
+                    <option>Barbados</option>
+                    <option>Belarus</option>
+                    <option>Belgium</option>
+                    <option>Belize</option>
+                    <option>Benin</option>
+                    <option>Bhutan</option>
+                    <option>Bolivia</option>
+                    <option>Bosnia and Herzegovina</option>
+                    <option>Botswana</option>
+                    <option>Brazil</option>
+                    <option>Brunei</option>
+                    <option>Bulgaria</option>
+                    <option>Burkina Faso</option>
+                    <option>Burundi</option>
+                    <option>Cabo Verde</option>
+                    <option>Cambodia</option>
+                    <option>Cameroon</option>
+                    <option>Canada</option>
+                    <option>Central African Republic</option>
+                    <option>Chad</option>
+                    <option>Chile</option>
+                    <option>China</option>
+                    <option>Colombia</option>
+                    <option>Comoros</option>
+                    <option>Congo, Democratic Republic of the</option>
+                    <option>Congo, Republic of the</option>
+                    <option>Costa Rica</option>
+                    <option>Côte d'Ivoire</option>
+                    <option>Croatia</option>
+                    <option>Cuba</option>
+                    <option>Cyprus</option>
+                    <option>Czech Republic</option>
+                    <option>Denmark</option>
+                    <option>Djibouti</option>
+                    <option>Dominica</option>
+                    <option>Dominican Republic</option>
+                    <option>Ecuador</option>
+                    <option>Egypt</option>
+                    <option>El Salvador</option>
+                    <option>Equatorial Guinea</option>
+                    <option>Eritrea</option>
+                    <option>Estonia</option>
+                    <option>Eswatini</option>
+                    <option>Ethiopia</option>
+                    <option>Fiji</option>
+                    <option>Finland</option>
+                    <option>France</option>
+                    <option>Gabon</option>
+                    <option>Gambia</option>
+                    <option>Georgia</option>
+                    <option>Germany</option>
+                    <option>Ghana</option>
+                    <option>Greece</option>
+                    <option>Grenada</option>
+                    <option>Guatemala</option>
+                    <option>Guinea</option>
+                    <option>Guinea-Bissau</option>
+                    <option>Guyana</option>
+                    <option>Haiti</option>
+                    <option>Honduras</option>
+                    <option>Hungary</option>
+                    <option>Iceland</option>
+                    <option>India</option>
+                    <option>Indonesia</option>
+                    <option>Iran</option>
+                    <option>Iraq</option>
+                    <option>Ireland</option>
+                    <option>Israel</option>
+                    <option>Italy</option>
+                    <option>Jamaica</option>
+                    <option>Japan</option>
+                    <option>Jordan</option>
+                    <option>Kazakhstan</option>
+                    <option>Kenya</option>
+                    <option>Kiribati</option>
+                    <option>Korea, North</option>
+                    <option>Korea, South</option>
+                    <option>Kosovo</option>
+                    <option>Kuwait</option>
+                    <option>Kyrgyzstan</option>
+                    <option>Laos</option>
+                    <option>Latvia</option>
+                    <option>Lebanon</option>
+                    <option>Lesotho</option>
+                    <option>Liberia</option>
+                    <option>Libya</option>
+                    <option>Liechtenstein</option>
+                    <option>Lithuania</option>
+                    <option>Luxembourg</option>
+                    <option>Madagascar</option>
+                    <option>Malawi</option>
+                    <option>Malaysia</option>
+                    <option>Maldives</option>
+                    <option>Mali</option>
+                    <option>Malta</option>
+                    <option>Marshall Islands</option>
+                    <option>Mauritania</option>
+                    <option>Mauritius</option>
+                    <option>Mexico</option>
+                    <option>Micronesia</option>
+                    <option>Moldova</option>
+                    <option>Monaco</option>
+                    <option>Mongolia</option>
+                    <option>Montenegro</option>
+                    <option>Morocco</option>
+                    <option>Mozambique</option>
+                    <option>Myanmar (Burma)</option>
+                    <option>Namibia</option>
+                    <option>Nauru</option>
+                    <option>Nepal</option>
+                    <option>Netherlands</option>
+                    <option>New Zealand</option>
+                    <option>Nicaragua</option>
+                    <option>Niger</option>
+                    <option>Nigeria</option>
+                    <option>North Macedonia</option>
+                    <option>Norway</option>
+                    <option>Oman</option>
+                    <option>Pakistan</option>
+                    <option>Palau</option>
+                    <option>Palestine</option>
+                    <option>Panama</option>
+                    <option>Papua New Guinea</option>
+                    <option>Paraguay</option>
+                    <option>Peru</option>
+                    <option>Philippines</option>
+                    <option>Poland</option>
+                    <option>Portugal</option>
+                    <option>Qatar</option>
+                    <option>Romania</option>
+                    <option>Russia</option>
+                    <option>Rwanda</option>
+                    <option>Saint Kitts and Nevis</option>
+                    <option>Saint Lucia</option>
+                    <option>Saint Vincent and the Grenadines</option>
+                    <option>Samoa</option>
+                    <option>San Marino</option>
+                    <option>Sao Tome and Principe</option>
+                    <option>Saudi Arabia</option>
+                    <option>Senegal</option>
+                    <option>Serbia</option>
+                    <option>Seychelles</option>
+                    <option>Sierra Leone</option>
+                    <option>Singapore</option>
+                    <option>Slovakia</option>
+                    <option>Slovenia</option>
+                    <option>Solomon Islands</option>
+                    <option>Somalia</option>
+                    <option>South Africa</option>
+                    <option>South Sudan</option>
+                    <option>Spain</option>
+                    <option>Sri Lanka</option>
+                    <option>Sudan</option>
+                    <option>Suriname</option>
+                    <option>Sweden</option>
+                    <option>Switzerland</option>
+                    <option>Syria</option>
+                    <option>Taiwan</option>
+                    <option>Tajikistan</option>
+                    <option>Tanzania</option>
+                    <option>Thailand</option>
+                    <option>Timor-Leste</option>
+                    <option>Togo</option>
+                    <option>Tonga</option>
+                    <option>Trinidad and Tobago</option>
+                    <option>Tunisia</option>
+                    <option>Turkey</option>
+                    <option>Turkmenistan</option>
+                    <option>Tuvalu</option>
+                    <option>Uganda</option>
+                    <option>Ukraine</option>
+                    <option>United Arab Emirates</option>
+                    <option>United Kingdom</option>
+                    <option>United States</option>
+                    <option>Uruguay</option>
+                    <option>Uzbekistan</option>
+                    <option>Vanuatu</option>
+                    <option>Vatican City</option>
+                    <option>Venezuela</option>
+                    <option>Vietnam</option>
+                    <option>Yemen</option>
+                    <option>Zambia</option>
+                    <option>Zimbabwe</option>
+                </select>
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="flex-row">
+            <div class="gender-box">
+                <label>Gender</label>
+                <div class="gender-option">
+                    <div class="gender">
+                        <input type="radio" asp-for="Gender" value="Male" checked />
+                        <label for="check-male">Male</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" asp-for="Gender" value="Female" />
+                        <label for="check-female">Female</label>
+                    </div>
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit">Register</button>
+        </div>
+
+        <p style="margin-top:12px; margin-bottom:0rem;">Already have an account? <a href="/Account/Login">Log in</a>.</p>
+    </form>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #f7f7f7;
+        }
+
+        .container {
+            position: relative;
+            max-width: 800px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+            .container header {
+                font-size: 1.8rem;
+                color: #333;
+                font-weight: 500;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+        .form {
+            margin-top: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .input-box {
+            flex: 1 1 calc(50% - 15px);
+            min-width: 200px;
+        }
+
+            .input-box label {
+                color: #333;
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+                display: block;
+            }
+
+            .input-box input,
+            .select-box select {
+                height: 45px;
+                width: 100%;
+                padding: 0 10px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                color: #707070;
+            }
+
+                .input-box input:focus {
+                    border-color: #6200ea;
+                    box-shadow: 0 0 3px rgba(98, 0, 234, 0.2);
+                }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .gender-box h5 {
+            margin-bottom: 8px;
+        }
+
+        .gender-option {
+            display: flex;
+            gap: 20px;
+        }
+
+        .gender input {
+            accent-color: #6200ea;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+            .checkbox input {
+                margin-right: 10px;
+            }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .button-container button {
+                width: 25%;
+                height: 50px;
+                border: none;
+                border-radius: 25px;
+                color: #fff;
+                background: #6200ea;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+
+                .button-container button:hover {
+                    background: #5200c8;
+                }
+
+        .form p {
+            text-align: center;
+        }
+
+        .form a {
+            color: #6200ea;
+        }
+
+            .form a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</section>

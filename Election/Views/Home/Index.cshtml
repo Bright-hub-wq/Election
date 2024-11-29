@@ -1,0 +1,418 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<style>
+    .banner-one {
+		background-image: url('bg-img/ai.webp');
+		background-size:cover;
+		background-position:center;
+		background-repeat:no-repeat;
+
+	}
+</style>
+
+<div class="page-wraper">
+	<nav class="navbar">
+        <a class="navbar-brand"></a>
+		<div class="navbar-toggle" id="navbar-toggle">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+		<ul class="navbar-menu" id="navbar-menu">
+			<li class="navbar-item"><a href="/Home/Index">Home</a></li>
+			<li class="navbar-item"><a href="/Home/About">About Us</a></li>
+			<li class="navbar-item"><a href="/Home/Team">Team</a></li>
+			<li class="navbar-item"><a href="/Home/Services">Services</a></li>
+			<li class="navbar-item"><a href="/Home/ContactUs">Contact Us</a></li>
+			<li class="navbar-item"><a href="/Account/Registeration">Register</a></li>
+			<li class="navbar-item"><a href="/Account/Login">Login</a></li>
+		</ul>
+	</nav>
+
+	<script>
+		// Toggle Navbar Menu
+		document.getElementById('navbar-toggle').addEventListener('click', () => {
+			const menu = document.getElementById('navbar-menu');
+			menu.classList.toggle('active');
+		});
+	</script>
+	<div class="page-content bg-white">
+		<!-- Slider -->
+		<div class="banner-one">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-8 ">
+						<div class="banner-content">
+							<h1 class="bnr-title">We Make Online Elections Easy and Affordable</h1>
+							<div>
+								<a href="/Home/About" class="btn btn-secondary m-r15" style="border-radius: 30px;">Read More</a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="content-inner-2" style="background-image:url('bg-img/pt-bg1.jpg'); background-position:right top; background-size:70%; background-repeat:no-repeat;">
+			<div class="container">
+				<div class="row mb-5">
+					<div class="col-lg-6">
+						<div class="section-head style-3">
+							<h2 class="title">We Can Work Together For Create a Better Future.</h2>
+						</div>
+					</div>
+					<div class="col-lg-6 mt-3">
+						<p>Every vote counts and contributes to shaping the future of our community. By participating in the voting process, we exercise our right to influence positive change and ensure that our leaders reflect our collective values and aspirations.</p>
+						<a class="btn btn-secondary style-2" href="/Home/ContactUs" style="border-radius: 30px;">CONTACT US</a>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row align-items-center about-bx5">
+					<div class="col-lg-6">
+						<div class="ic-media">
+							<!-- Removed pattern, kept only the large image -->
+							<img src="~/vote/images/about/vote.jpeg" alt="" class="img-fluid" style="width: 100%; height: auto; border-radius: 10px;">
+						</div>
+					</div>
+					<div class="col-lg-6 m-b30">
+						<div class="section-head style-3">
+							<h2 class="title">We believe in a society and economy driven by values, not profits.</h2>
+						</div>
+						<p><strong>By voting, we can ensure that our leaders prioritize the well-being of our communities over financial gain. When we come together to support candidates who share our values, we pave the way for policies that promote fairness, sustainability, and social justice.</strong></p>
+						<div class="history-row m-b30">
+							<div>
+								<h2 class="year"><span class="counter">300</span>+</h2>
+								<span class="text">Online Elections</span>
+							</div>
+							<div>
+								<h2 class="awards"><span class="counter">250</span>+</h2>
+								<span class="text">Vote Papers</span>
+							</div>
+							<div>
+								<h2 class="sales"><span class="counter">235</span>+</h2>
+								<span class="text">Published Results</span>
+							</div>
+						</div>
+						<a href="/Home/About" class="btn shadow-primary btn-secondary" style="border-radius: 30px;">READ MORE</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="content-inner overflow-hidden" style="background-image: url('bg-img/pt-bg2.jpg'); background-repeat: repeat-x; background-position: bottom;">
+			<div class="container">
+				<div class="section-head style-3 text-center">
+					<h2 class="title">Our Voting Services</h2>
+				</div>
+				<div class="row">
+					<div class="col-xl-3 col-md-6 aos-item aos-init aos-animate" data-aos="flip-down" data-aos-duration="1500" data-aos-delay="400">
+						<div class="icon-bx-wraper bx-style-1 style-15 m-b30 p-a30" data-name="1.">
+							<div class="icon-bx-sm radius m-b20">
+								<span class="icon-cell">
+									<svg width="64px" height="64px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione-monotone" preserveAspectRatio="xMidYMid meet" fill="#272E7C"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M54.509 30.995c2.29-1.775 4.217-4.207 4.7-7.055C60.562 23.719 62 22.825 62 20.019c0-2.482-.894-3.223-1.646-3.405c-.079-10.17-2.48-14.507-13.239-14.612c-10.853-.107-13.71 4.417-13.813 14.735c-.656.321-1.302 1.17-1.302 3.282c0 2.807 1.437 3.701 2.789 3.921c.478 2.816 2.366 5.221 4.621 6.992c-4.482.608-7.41 1.44-7.41 3.841c0-2.402-2.928-3.234-7.41-3.841c2.255-1.771 4.144-4.176 4.621-6.992C30.563 23.719 32 22.825 32 20.019c0-2.111-.646-2.961-1.302-3.281c-.103-10.319-2.961-14.843-13.813-14.736c-10.759.105-13.16 4.442-13.239 14.611c-.752.183-1.646.923-1.646 3.406c0 2.807 1.438 3.701 2.791 3.921c.483 2.848 2.41 5.279 4.7 7.055C5.183 31.655 2 32.913 2 34.773V62h60V34.773c0-1.86-3.183-3.118-7.491-3.778m-18.817-7.57l-.049-.405l-.396-.031c-1.556-.119-2.28-1.063-2.28-2.97c0-1.633.38-2.46 1.129-2.46c.045 0 .09.002.137.007c.098.594.215 1.024.357 1.311c.348.698 1.007 1.08 1.082 1.122l.837.467l-.128-.975a18.63 18.63 0 0 1-.097-2.739c.318-5.024.624-5.695 1.668-5.695c.478 0 1.134.139 1.966.313c1.627.341 3.854.809 7.081.809s5.454-.468 7.08-.809c.832-.175 1.489-.313 1.967-.313c1.044 0 1.349.672 1.667 5.693c.055 1.58-.096 2.729-.098 2.74l-.131.979l.841-.471c.074-.041.73-.423 1.081-1.122c.141-.283.258-.714.357-1.31c.851-.092 1.268.724 1.268 2.453c0 1.906-.725 2.851-2.282 2.97l-.396.031l-.049.405c-.722 5.937-8.3 9.702-11.306 9.702c-3.005 0-10.584-3.765-11.306-9.702M22.153 51.484c-.886 0-1.123-.791-1.123-1.258s.237-1.26 1.123-1.26h.455l.451-4.975c0-.623.195-.939 1.266-.939c.715 0 1.651.156 2.736.338c1.482.246 3.163.525 4.939.525s3.457-.279 4.94-.525c1.085-.182 2.022-.338 2.739-.338c1.07 0 1.267.316 1.268.984l.445 4.93h.456c.886 0 1.123.793 1.123 1.26s-.237 1.258-1.123 1.258h-.5v.5c0 3.975-5.537 6.51-9.349 6.51s-9.349-2.535-9.349-6.51v-.5h-.497M5.694 23.425l-.048-.405l-.396-.032c-1.558-.119-2.282-1.063-2.282-2.97c0-1.729.417-2.545 1.268-2.453c.1.596.217 1.026.357 1.31c.351.699 1.007 1.081 1.081 1.122l.841.471l-.131-.979a18.301 18.301 0 0 1-.098-2.74c.318-5.021.623-5.693 1.667-5.693c.478 0 1.135.139 1.967.313c1.626.341 3.853.809 7.08.809s5.454-.468 7.081-.809c.832-.175 1.488-.313 1.966-.313c1.044 0 1.35.671 1.668 5.695a18.452 18.452 0 0 1-.097 2.739l-.128.975l.837-.467c.075-.042.734-.424 1.082-1.122c.143-.286.26-.717.357-1.311c.047-.005.092-.007.137-.007c.749 0 1.129.827 1.129 2.46c0 1.906-.725 2.851-2.28 2.97l-.396.031l-.049.405c-.722 5.937-8.301 9.702-11.308 9.702c-3.005.001-10.583-3.764-11.305-9.701M3.017 61V34.773c0-1.143 2.905-2.341 7.65-2.937c2.242 1.455 4.648 2.291 6.333 2.291c1.702 0 4.143-.855 6.405-2.339c4.994.57 8.078 1.734 8.078 3.212v1.018c-6.421.191-10.357 3.885-10.357 8.457v3.154c0 .207.012.4.029.584c-.736.391-1.123 1.203-1.123 2.014c0 .984.562 1.98 1.642 2.209c.153 1.795 1.218 3.297 2.7 4.451c-2.442.885-4.253 2.252-4.735 4.113H3.017m17.649 0c.54-1.555 2.345-2.695 4.706-3.416c2.021 1.23 4.525 1.91 6.629 1.91c2.102 0 4.605-.678 6.623-1.906c2.36.721 4.17 1.859 4.71 3.412H20.666m40.317 0H44.361c-.481-1.861-2.289-3.232-4.729-4.115c1.479-1.154 2.543-2.656 2.696-4.449c1.08-.229 1.643-1.225 1.643-2.209c0-.809-.386-1.617-1.116-2.01c.017-.184.025-.379.025-.588v-3.154c0-4.568-4.142-8.26-10.363-8.457V35c0-1.479 3.084-2.642 8.078-3.212c2.263 1.484 4.703 2.339 6.405 2.339c1.685 0 4.091-.836 6.333-2.291c4.745.596 7.65 1.794 7.65 2.937V61" fill="#272E7C"></path><circle cx="41.5" cy="20.308" r="2.25" fill="#272E7C"></circle><circle cx="52.5" cy="20.308" r="2.25" fill="#272E7C"></circle><path d="M50.934 27.655c.188-.346-.063-.719-.34-.504c-2.316 1.801-4.887 1.789-7.189 0c-.277-.215-.527.158-.34.504c.703 1.285 2.121 2.434 3.934 2.434c1.814-.001 3.231-1.149 3.935-2.434" fill="#272E7C"></path><circle cx="22.498" cy="20.308" r="2.25" fill="#272E7C"></circle><circle cx="11.5" cy="20.308" r="2.25" fill="#272E7C"></circle><path d="M20.936 27.655c.188-.346-.063-.719-.34-.504c-2.303 1.789-4.873 1.801-7.189 0c-.277-.215-.527.158-.34.504c.703 1.285 2.121 2.434 3.936 2.434c1.811-.001 3.229-1.149 3.933-2.434" fill="#272E7C"></path><circle cx="27.228" cy="49.796" r="1.749" fill="#272E7C"></circle><circle cx="36.774" cy="49.796" r="1.749" fill="#272E7C"></circle><path d="M28.566 54.783c.614 1.07 1.851 2.027 3.435 2.027s2.82-.957 3.436-2.027c.163-.289-.055-.6-.297-.42c-2.011 1.49-4.255 1.5-6.275 0c-.245-.179-.462.131-.299.42" fill="#272E7C"></path></g></svg>
+								</span>
+							</div>
+							<h4 class="title m-b15"><a href="services-details.html">Online<br>Elections</a></h4>
+							<p>Send your voters an email with secure, single-use voting links that ensure only authorized voters can vote, once.</p>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6 aos-item aos-init aos-animate" data-aos="flip-down" data-aos-duration="1500" data-aos-delay="400">
+						<div class="icon-bx-wraper bx-style-1 style-15 m-b30 p-a30" data-name="2.">
+							<div class="icon-bx-sm radius m-b20">
+								<span class="icon-cell">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+										<path d="M17.03 116h93.94a5.94 5.94 0 0 0 4.82-2.42 63.38 63.38 0 0 0 12.17-39.74c-1.14-34.64-30.32-62.37-65-61.83a63.983 63.983 0 0 0-50.83 101.46 6.071 6.071 0 0 0 4.9 2.53zM42 107a2 2 0 0 1-4 0v-2h4zm-1.96-12A4.04 4.04 0 0 1 36 91a3.959 3.959 0 0 1 3.96-4A4.04 4.04 0 0 1 44 91a3.959 3.959 0 0 1-3.96 4zm3.26 17a6.019 6.019 0 0 0 2.7-5v-2h35v2a6.019 6.019 0 0 0 2.7 5zm1.41-38l2.32-7.5a.949.949 0 0 1 .68-.5h32.58a.949.949 0 0 1 .68.5l2.32 7.5zM73.5 91a2.006 2.006 0 0 1-2 2h-16a2 2 0 0 1 0-4h16a2.006 2.006 0 0 1 2 2zM89 107a2 2 0 0 1-4 0v-2h4zm-1.96-12A4.04 4.04 0 0 1 83 91a3.959 3.959 0 0 1 3.96-4A4.04 4.04 0 0 1 91 91a3.959 3.959 0 0 1-3.96 4zM63.03 16.01c.32-.01.63-.01.95-.01a60.275 60.275 0 0 1 59.99 57.97 59.447 59.447 0 0 1-11.42 37.26 1.948 1.948 0 0 1-1.58.77H90.3a6.019 6.019 0 0 0 2.7-5v-2h6.89a3.048 3.048 0 0 0 3.1-3.02l-.07-16.13c-.14-4.44-3.29-7.38-7.25-8.83l-5.19-13.11c-1.39-3.53-2.35-6.63-6.55-6.87L42.98 57c-3.31 0-4.78 3.78-5.95 6.86l-4.95 13.1c-3.26 1.21-6.3 3.39-7 7.01-.08.54-.1 12.63 0 18.01a3.172 3.172 0 0 0 3.21 3.02H34v2a6.019 6.019 0 0 0 2.7 5H17.03a2.096 2.096 0 0 1-1.66-.87A59.555 59.555 0 0 1 4 76a60.253 60.253 0 0 1 59.03-59.99zM16.58 91.511a2 2 0 0 0 1.351-2.485A47.104 47.104 0 0 1 16 75.645a48.001 48.001 0 0 1 96 0 47.104 47.104 0 0 1-1.931 13.38 2 2 0 0 0 1.351 2.485 2.025 2.025 0 0 0 2.485-1.351A51.121 51.121 0 0 0 116 75.645a52.001 52.001 0 0 0-104 0 51.121 51.121 0 0 0 2.095 14.515 2.003 2.003 0 0 0 2.485 1.351z" />
+									</svg>
+								</span>
+							</div>
+							<h4 class="title m-b15"><a href="services-details.html">Online<br>Polls</a></h4>
+							<p>Create a personalized poll that anyone can vote on, and publicize it using your website, email, or social media.</p>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6 aos-item aos-init aos-animate" data-aos="flip-down" data-aos-duration="1500" data-aos-delay="400">
+						<div class="icon-bx-wraper bx-style-1 style-15 m-b30 p-a30" data-name="3.">
+							<div class="icon-bx-sm radius m-b20">
+								<span class="icon-cell">
+									<svg fill="#272E7C" width="83px" height="83px" viewBox="0 0 56 56" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.11200000000000002"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M18.9,25.5C18.9,25.5,18.9,25.5,18.9,25.5C18.9,25.6,18.9,25.6,18.9,25.5c2.3,2.5,5.6,4.1,9.1,4.1c3.6,0,6.8-1.6,9-4 c0,0,0.1-0.1,0.1-0.1c0,0,0,0,0,0c1.9-2.2,3.1-5,3.1-8.1C40.3,10.5,34.8,5,28,5c-3.7,0-7.1,1.7-9.3,4.3c0,0-0.1,0-0.1,0.1 c0,0,0,0,0,0c-1.8,2.1-2.9,4.9-2.9,7.9C15.7,20.5,16.9,23.3,18.9,25.5z M19.7,11.3c1,0.6,2.2,1.1,3.4,1.5c-0.2,1.1-0.3,2.3-0.4,3.6 h-4.9C17.9,14.4,18.6,12.7,19.7,11.3z M38.2,16.3h-4.9c0-1.2-0.2-2.4-0.4-3.5c1.3-0.3,2.4-0.8,3.5-1.4 C37.4,12.8,38.1,14.5,38.2,16.3z M36.1,23.6c-0.9-0.5-2-0.9-3.2-1.3c0.2-1.3,0.4-2.6,0.4-4h4.9C38,20.3,37.3,22.1,36.1,23.6z M25,13.2c1,0.2,2.1,0.3,3.1,0.3c1,0,1.9-0.1,2.9-0.2c0.2,0.9,0.3,2,0.3,3.1h-6.6C24.8,15.2,24.9,14.1,25,13.2z M25.5,11.2 c0.7-2.5,1.7-4,2.5-4c0.8,0,1.9,1.5,2.6,4C28.9,11.5,27.1,11.5,25.5,11.2z M31.3,18.3c0,1.3-0.2,2.5-0.4,3.6c-1-0.2-2-0.2-3.1-0.2 c-1,0-1.9,0.1-2.8,0.3c-0.2-1.1-0.3-2.3-0.4-3.7H31.3z M24.7,27c-1.2-0.4-2.3-1.1-3.3-1.9c0.6-0.3,1.4-0.6,2.2-0.8 C23.9,25.3,24.2,26.2,24.7,27z M25.5,23.9c0.8-0.1,1.6-0.2,2.4-0.2c0.9,0,1.7,0.1,2.6,0.2c-0.7,2.3-1.7,3.7-2.5,3.7 C27.2,27.6,26.2,26.3,25.5,23.9z M32.4,24.3c0.9,0.2,1.6,0.5,2.3,0.8c-1,0.8-2.1,1.5-3.4,1.9C31.8,26.2,32.1,25.3,32.4,24.3z M32.5,10.9c-0.3-1.3-0.8-2.4-1.3-3.3C32.7,8,34,8.8,35.1,9.9C34.3,10.3,33.4,10.6,32.5,10.9z M23.5,10.8c-0.9-0.3-1.7-0.6-2.5-1 c1.1-1,2.4-1.8,3.8-2.3C24.3,8.4,23.8,9.6,23.5,10.8z M22.7,18.3c0,1.4,0.2,2.8,0.4,4.1c-1.3,0.3-2.3,0.7-3.2,1.3 c-1.2-1.5-2-3.3-2.1-5.3H22.7z"></path> <path d="M52.2,35.3c-1-1-2.8-0.9-4.1-0.6c-0.4,0.1-0.7,0.2-1.1,0.4l-9.2,4.4c-0.3,0.2-0.7,0.3-1.1,0.3h-1.9 c0.4-0.9,0.3-1.8-0.2-2.8c-0.8-1.4-2.3-2.2-4-2.2h-9.8c-0.6,0-1.2,0.1-1.8,0.3l-6.9,2.7C11.8,37,11,36.3,10,36.3H5.2 c-1.2,0-2.2,1-2.2,2.2v10.2C3,50,4,51,5.2,51H10c0.9,0,1.6-0.5,2-1.2l10.3,0c0.3,0,0.5,0,0.8-0.1l15.3-2.7c0.5-0.1,0.9-0.2,1.3-0.4 l10.9-5.7c1.3-0.7,2.2-1.9,2.4-3.2C53.1,36.4,52.7,35.7,52.2,35.3z M10,49H5.2C5.1,49,5,48.9,5,48.8V38.6c0-0.1,0.1-0.2,0.2-0.2H10 c0.1,0,0.2,0.1,0.2,0.2v0.7c0,0,0,0,0,0v9.5C10.2,48.9,10.1,49,10,49z M51,37.3c-0.1,0.7-0.6,1.3-1.3,1.7l-10.9,5.7 c-0.2,0.1-0.5,0.2-0.7,0.2l-15.3,2.7c-0.1,0-0.3,0-0.4,0l-10.1,0V40l7.5-3c0.3-0.1,0.7-0.2,1-0.2h9.8c1,0,1.9,0.5,2.3,1.2 c0.3,0.5,0.3,0.9-0.2,1.3c-0.4,0.5-1.1,0.8-1.9,0.8h-9.4c-0.6,0-1,0.4-1,1s0.4,1,1,1h9.4c0.6,0,1.2-0.1,1.7-0.3h4.2 c0.7,0,1.4-0.2,2-0.4l9.2-4.4c0.2-0.1,0.4-0.2,0.6-0.2c1.3-0.3,2.1-0.1,2.4,0.1C51,36.8,51,37,51,37.3z"></path> </g> </g></svg>
+								</span>
+							</div>
+							<h4 class="title m-b15"><a href="services-details.html">Automated<br>Ballot Count</a></h4>
+							<p>Count ranked ballots that you've already collected (using e.g., paper ballots or your own vote collection software).</p>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6 aos-item aos-init aos-animate" data-aos="flip-down" data-aos-duration="1500" data-aos-delay="400">
+						<div class="icon-bx-wraper bx-style-1 style-15 m-b30 p-a30" data-name="4.">
+							<div class="icon-bx-sm radius m-b20">
+								<span class="icon-cell">
+									<svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#272E7C"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="#272E7C" d="M54,22C54,9.869,44.131,0,32,0S10,9.869,10,22c0,6.816,3.117,12.92,8,16.958V62 c0,0.758,0.428,1.45,1.105,1.789C19.388,63.931,19.694,64,19.998,64c0.426,0,0.848-0.136,1.202-0.4L32,55.5l10.8,8.1 c0.354,0.265,0.775,0.4,1.2,0.4c0.305,0,0.611-0.069,0.895-0.211C45.572,63.45,46,62.758,46,62V38.958 C50.883,34.92,54,28.816,54,22z M20,62V40.425c0.645,0.421,1.312,0.809,2,1.161V60.5L20,62z M32,53l-8,6V42.487 C26.481,43.46,29.178,44,32,44s5.519-0.54,8-1.513V59L32,53z M44,62l-2-1.5V41.586c0.688-0.353,1.355-0.74,2-1.161V62z M32,42 c-11.028,0-20-8.972-20-20S20.972,2,32,2s20,8.972,20,20S43.028,42,32,42z"></path> <path fill="#272E7C" d="M32,4c-9.925,0-18,8.075-18,18s8.075,18,18,18s18-8.075,18-18S41.925,4,32,4z M32,38 c-8.822,0-16-7.178-16-16S23.178,6,32,6s16,7.178,16,16S40.822,38,32,38z"></path> <path fill="#272E7C" d="M39.147,19.361l-4.309-0.658l-1.936-4.123c-0.165-0.352-0.518-0.575-0.905-0.575s-0.74,0.224-0.905,0.575 l-1.936,4.123l-4.309,0.658c-0.37,0.057-0.678,0.315-0.797,0.671s-0.029,0.747,0.232,1.016l3.146,3.227l-0.745,4.564 c-0.062,0.378,0.099,0.758,0.411,0.979s0.725,0.243,1.061,0.058l3.841-2.124l3.841,2.124C35.99,29.959,36.157,30,36.323,30 c0.202,0,0.404-0.062,0.576-0.183c0.312-0.221,0.473-0.601,0.411-0.979l-0.745-4.564l3.146-3.227 c0.262-0.269,0.352-0.66,0.232-1.016S39.518,19.418,39.147,19.361z M34.781,23.239c-0.222,0.228-0.322,0.546-0.271,0.859 l0.495,3.029l-2.522-1.395c-0.151-0.083-0.317-0.125-0.484-0.125s-0.333,0.042-0.484,0.125l-2.522,1.395l0.495-3.029 c0.051-0.313-0.05-0.632-0.271-0.859l-2.141-2.194l2.913-0.445c0.329-0.05,0.612-0.261,0.754-0.563l1.257-2.678l1.257,2.678 c0.142,0.303,0.425,0.514,0.754,0.563l2.913,0.445L34.781,23.239z"></path> </g> </g></svg>
+								</span>
+							</div>
+							<h4 class="title m-b15"><a href="services-details.html">Reliable<br>Online Voting</a></h4>
+							<p>Ensures that every vote is counted accurately and securely, providing a trustworthy platform for elections.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<!-- Projects -->
+        
+		<!-- How It Work -->
+		<section class="content-inner overflow-hidden bg-light overlay-black-dark" style="background-image: url('bg-img/slide2.jpg');background-position: center bottom;background-repeat: repeat-x; background-attachment:fixed; padding-top:80px;">
+			<div class="container">
+				<div class="row align-items-center about-bx5 text-white">
+					<div class="col-lg-6 aos-item aos-init aos-animate" data-aos="fade-in" data-aos-duration="800" data-aos-delay="400">
+						<div class="section-head style-3 text-white">
+							<h2 class="title">TALK TO US ABOUT SOLVING YOUR POLITICAL PROBLEMS</h2>
+						</div>
+						<div class="progress-bx style-3 m-b40">
+							<div class="progress-info">
+								<h4 class="title text-white">Leverage Technology</h4>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 80%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+									<h5 class="progress-value">80</h5>
+								</div>
+							</div>
+						</div>
+						<div class="progress-bx style-3 m-b40">
+							<div class="progress-info">
+								<h4 class="title text-white">Promote Accountability</h4>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 90%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+									<h5 class="progress-value">90</h5>
+								</div>
+							</div>
+						</div>
+						<div class="progress-bx style-3 m-b40">
+							<div class="progress-info">
+								<h4 class="title text-white">Monitor and Evaluate</h4>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 70%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+									<h5 class="progress-value">70</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="ic-media right">
+							<img src="~/vote/images/about/pic9.jpg" alt="" class="img1 aos-item aos-init aos-animate" data-aos="fade-down" data-aos-duration="800" data-aos-delay="400">
+							<img src="~/vote/images/pattern/pt13.png" class="circle-bg" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Blog -->
+		<section class="content-inner-1 line-img" style="background-image:url('bg-img/pt-bg1.jpg'); background-position:right top; background-size:70%; background-repeat:no-repeat;">
+			<div class="container">
+				<div class="section-head style-3 text-center">
+					<h2 class="title">Latest News & Press</h2>
+				</div>
+				<div class="blog-area">
+					<div class="swiper-container blog-swiper overflow-hidden">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<div class="ic-card blog-grid style-4 aos-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="200">
+									<div class="ic-media">
+										<a href="blog-details.html"><img src="~/vote/images/blog/blog-grid/pic3.jpg" alt=""></a>
+									</div>
+									<div class="ic-info">
+										<div class="ic-meta">
+											<ul>
+												<li class="post-date">7 June 2024</li>
+												<li class="post-user">By <a href="javascript:void(0);">Admin</a></li>
+											</ul>
+										</div>
+										<h5 class="ic-title"><a href="blog-details.html">Principle stability in the future with activity </a></h5>
+										<div class="ic-post-text text">
+											<p> By voting, we ensure that our leaders uphold these principles, providing a stable foundation for progress.</p>
+										</div>
+										<a href="blog-details.html" class="btn shadow-primary icon-btn btn-secondary"><i class="fas fa-caret-right"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="ic-card blog-grid style-4 aos-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500">
+									<div class="ic-media">
+										<a href="blog-details.html"><img src="~/vote/images/blog/blog-grid/pic5.jpg" alt=""></a>
+									</div>
+									<div class="ic-info">
+										<div class="ic-meta">
+											<ul>
+												<li class="post-date">7 June 2024</li>
+												<li class="post-user">By <a href="javascript:void(0);">Admin</a></li>
+											</ul>
+										</div>
+										<h5 class="ic-title"><a href="blog-details.html">How to invent a law & pass it in parliament</a></h5>
+										<div class="ic-post-text text">
+											<p> By voting, we elect representatives who can introduce and advocate for laws that reflect our values and address our needs.</p>
+										</div>
+										<a href="blog-details.html" class="btn shadow-primary icon-btn btn-secondary"><i class="fas fa-caret-right"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="ic-card blog-grid style-4 aos-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="800">
+									<div class="ic-media">
+										<a href="blog-details.html"><img src="~/vote/images/blog/blog-grid/pic6.jpg" alt=""></a>
+									</div>
+									<div class="ic-info">
+										<div class="ic-meta">
+											<ul>
+												<li class="post-date">7 June 2024</li>
+												<li class="post-user">By <a href="javascript:void(0);">Admin</a></li>
+											</ul>
+										</div>
+										<h5 class="ic-title"><a href="blog-details.html">Our humanity of  Preparing Youth for Success</a></h5>
+										<div class="ic-post-text text">
+											<p> By voting, we can support policies and leaders who prioritize education, mentorship, and opportunities for young people.</p>
+										</div>
+										<a href="blog-details.html" class="btn shadow-primary icon-btn btn-secondary"><i class="fas fa-caret-right"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="ic-card blog-grid style-4 aos-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="200">
+									<div class="ic-media">
+										<a href="blog-details.html"><img src="~/vote/images/blog/blog-grid/pic4.jpg" alt=""></a>
+									</div>
+									<div class="ic-info">
+										<div class="ic-meta">
+											<ul>
+												<li class="post-date">7 June 2024</li>
+												<li class="post-user">By <a href="javascript:void(0);">Admin</a></li>
+											</ul>
+										</div>
+										<h5 class="ic-title"><a href="blog-details.html">Empowering Our Future</a></h5>
+										<div class="ic-post-text text">
+											<p> By voting, we can support leaders and policies that invest in education, innovation, and opportunities for our youth.Together, we can build a future where everyone has the chance to thrive and contribute to a better world.</p>
+										</div>
+										<a href="blog-details.html" class="btn shadow-primary icon-btn btn-secondary"><i class="fas fa-caret-right"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="">
+			<div class="container">
+				<div class="row ft-subscribe-wrapper justify-content-center text-center">
+					<div class="col-xl-8">
+						<div class="section-head text-center style-3">
+							<h2 class="title">SUBSCRIBE TO GET LATEST NEWS ABOUT US</h2>
+							<p>We recommended you to subscribe to our newslatter, enter your email below to get daily update about us.</p>
+						</div>
+						<div class="ft-subscribe style-2 aos-item aos-animate" data-aos="fade-up" data-aos-duration="250" data-aos-delay="100">
+							<form class="icSubscribe">
+								<div class="icSubscribeMsg"></div>
+								<div class="input-group">
+									<input name="icEmail" required="required" type="email" class="form-control" placeholder="Enter Your Email Address">
+									<button name="submit" value="Submit" type="submit" class="btn btn-secondary">
+										<span>SUBSCRIBE NOW </span>
+										<i class="far fa-paper-plane"></i>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!-- Footer -->
+	<footer class="site-footer style-4 overflow-hidden" id="footer">
+		<img src="~/vote/images/pattern/pt13.png" class="circle-bg" alt="">
+		<img src="~/vote/images/pattern/pt13.png" class="circle-bg-2" alt="">
+		<div class="footer-top line-img">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-3 aos-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
+						<div class="widget widget_getintuch">
+							<div class="widget-title">
+								<h4 class="title">Contact Us</h4>
+							</div>
+							<ul>
+								<li><i class="flaticon-placeholder"></i>1247/Plot No. 39, 15th Phase,  Colony, Kukatpally, Hyderabad</li>
+								<li><i class="flaticon-phone-call"></i><a href="tel:+4733378901" class="callmailcolor">1800-121-3637<br>+91 555 234-8765</a></li>
+								<li><i class="flaticon-mail"></i><a href="mailto:someone@example.com" class="callmailcolor">info@gmail.com<br>services@gmail.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-6 aos-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+						<div class="widget widget_links p-l50">
+							<div class="widget-title">
+								<h4 class="title">Our Links</h4>
+							</div>
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="about-us.html">About Us</a></li>
+								<li><a href="portfolio.html">Portfolio</a></li>
+								<li><a href="services.html">Services</a></li>
+								<li><a href="team.html">Team</a></li>
+								<li><a href="blog-grid-2-sidebar.html">Blogs</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-6 aos-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+						<div class="widget widget_links">
+							<div class="widget-title">
+								<h4 class="title">Services</h4>
+							</div>
+							<ul>
+								<li><a href="#">Communication</a></li>
+								<li><a href="#">Project Planning</a></li>
+								<li><a href="#">Product Design</a></li>
+								<li><a href="#">Custom Design</a></li>
+								<li><a href="#">24x7 Suppoer</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6 aos-item aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+						<div class="widget-title">
+							<h4 class="title">About Company</h4>
+						</div>
+						<p>
+							Welcome to EasyVote, your trusted partner in secure and efficient online voting solutions. we are dedicated to revolutionizing the way elections are conducted by providing innovative and reliable e-voting platforms. Our mission is to enhance the democratic process by making voting more accessible, transparent, and secure for everyone.
+							<ul class="social-list style-2">
+							<li><a target="_blank" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+							<li><a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+							<li><a target="_blank" href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-6 text-lg-start">
+						<ul class="footer-link d-inline-block">
+							<li><a href="javascript:void(0);">Privacy Policy</a></li>
+							<li><a href="javascript:void(0);">Team &amp; Condition</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-6 text-lg-end mt-lg-0 mt-2">
+						<span class="copyright-text">Copyright © <span class="current-year">2024</span> <span class="heart"></span> <a href="https://indiankoder.com/portfolio.html" class="text-primary" target="_blank">indiancoder</a> All rights reserved.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer End -->
+	<button class="scroltop icon-up" type="button"><i class="fas fa-arrow-up"></i></button>
+</div>

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Election</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Election.styles.css" asp-append-version="true" />
+    <!-- Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+
+    <!-- Favicon icon -->
+	<link rel="icon" type="image/png" href="~/vote/images/favicon.png">
+    
+    <!-- Stylesheet -->
+    <link href="~/vote/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+	<link href="~/vote/vendor/magnific-popup/magnific-popup.min.css" rel="stylesheet">
+	<link href="~/vote/vendor/animate/animate.min.css" rel="stylesheet" />
+	<link href="~/vote/vendor/aos/aos.css" rel="stylesheet" />
+	<link href="~/vote/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<link href="~/vote/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="~/vote/css/style.css">
+</head>
+<body>
+	 <div id="loading-area">
+		<div class="loading-inner style-1">
+			<div class="wrapper">
+				<svg class="img1" xmlns="http://www.w3.org/2000/svg" width="100.000000pt" height="100.000000pt" viewBox="0 0 100.000000 100.000000" preserveAspectRatio="xMidYMid meet">
+					<g transform="translate(0.000000,100.000000) scale(0.100000,-0.100000)" fill="var(--primary)" stroke="none">
+						<path d="M402 988 c-41 -8 -52 -13 -48 -25 21 -53 19 -62 -16 -76 -32 -13 -33
+					-13 -52 17 -10 17 -20 33 -21 34 -2 2 -23 -10 -47 -26 -48 -34 -103 -90 -138
+					-141 -25 -36 -25 -36 26 -66 14 -9 15 -16 7 -40 -10 -31 -26 -36 -70 -21 -19
+					6 -23 2 -30 -31 -10 -47 -10 -165 0 -216 8 -36 9 -37 49 -35 37 3 42 0 51 -27
+					8 -24 7 -31 -7 -40 -51 -30 -51 -29 -18 -77 34 -50 111 -122 153 -144 25 -13
+					27 -12 45 21 10 19 20 35 22 35 11 0 62 -32 62 -40 0 -5 -5 -21 -10 -36 -6
+					-15 -9 -28 -7 -30 2 -2 36 -8 76 -14 66 -9 195 0 210 16 2 2 -1 20 -6 39 -11
+					35 -11 36 24 50 20 9 37 14 38 13 1 -2 10 -18 19 -36 l17 -33 31 18 c41 23
+					138 120 161 161 l18 31 -33 17 c-18 9 -34 18 -36 19 -2 2 4 17 13 35 17 32 27
+					34 78 14 20 -7 33 63 30 161 -3 84 -15 131 -34 127 -58 -14 -66 -13 -71 5 -3
+					10 -9 25 -12 34 -5 11 4 20 29 32 l36 17 -18 32 c-24 42 -120 139 -160 161
+					l-32 18 -17 -33 c-9 -18 -18 -34 -19 -36 -1 -2 -18 5 -37 14 -34 16 -35 18
+					-25 50 6 19 8 36 5 39 -8 9 -109 25 -147 24 -20 -1 -60 -6 -89 -11z m233 -130
+					c111 -41 209 -149 235 -259 20 -80 9 -196 -24 -263 -36 -73 -109 -146 -183
+					-183 -53 -25 -68 -28 -163 -28 -92 0 -112 3 -160 26 -119 57 -199 163 -222
+					296 -48 281 245 514 517 411z" />
+					</g>
+				</svg>
+				<svg class="img2" xmlns="http://www.w3.org/2000/svg" width="100.000000pt" height="100.000000pt" viewBox="0 0 100.000000 100.000000" preserveAspectRatio="xMidYMid meet">
+					<g transform="translate(0.000000,100.000000) scale(0.100000,-0.100000)" fill="var(--primary)" stroke="none">
+						<path d="M294 728 c-4 -7 -7 -76 -6 -154 3 -141 3 -141 -22 -158 -14 -9 -28
+					-16 -30 -16 -3 0 -7 53 -9 118 l-3 117 -2 -117 -2 -118 -30 0 c-16 0 -30 -2
+					-30 -5 0 -3 11 -28 25 -56 34 -67 95 -125 164 -158 48 -22 69 -26 151 -26 84
+					0 102 3 152 28 66 33 146 115 170 176 l16 41 -29 0 -29 0 0 100 0 100 -50 0
+					-50 0 0 40 c0 39 -1 40 -34 40 -31 0 -34 -3 -40 -40 -5 -32 -10 -40 -28 -40
+					-11 0 -27 8 -34 18 -16 21 -47 6 -52 -27 -2 -12 -11 -21 -22 -21 -10 0 -20 -7
+					-24 -15 -3 -8 -15 -15 -26 -15 -18 0 -21 5 -19 38 1 20 2 65 1 100 -2 55 -4
+					63 -19 60 -16 -3 -19 -21 -23 -158 -7 -204 -23 -205 -30 -1 -3 104 -9 156 -17
+					158 -6 2 -15 -2 -19 -9z m306 -168 c0 -13 -7 -20 -20 -20 -13 0 -20 7 -20 20
+					0 13 7 20 20 20 13 0 20 -7 20 -20z m160 -1 c0 -17 -5 -20 -37 -17 -27 2 -39
+					8 -41 21 -3 14 4 17 37 17 35 0 41 -3 41 -21z m-320 -90 c0 -43 -3 -50 -17
+					-47 -14 2 -19 15 -21 51 -3 42 -1 47 17 47 18 0 21 -6 21 -51z m145 14 c-12
+					-66 -24 -73 -25 -15 0 41 3 52 16 52 13 0 15 -7 9 -37z m175 -23 c0 -33 -4
+					-60 -10 -60 -5 0 -10 5 -10 10 0 6 -6 10 -14 10 -8 0 -17 14 -21 33 -4 17 -9
+					40 -11 50 -4 14 1 17 30 17 l36 0 0 -60z" />
+					</g>
+				</svg>
+			</div>
+			<div class="load-text">
+				<span data-text="E" class="text-load">E</span>
+				<span data-text="A" class="text-load">A</span>
+				<span data-text="S" class="text-load">S</span>
+				<span data-text="Y" class="text-load">Y</span>
+				<span data-text="V" class="text-load">V</span>
+				<span data-text="O" class="text-load">O</span>
+				<span data-text="T" class="text-load">T</span>
+				<span data-text="E" class="text-load">E</span>
+			
+			</div>
+		</div>
+	</div> 
+    <div class="jumbotron-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+	<script src="~/vote/vendor/bootstrap/js/popper.min.js"></script>
+	<!-- Bootstrap CSS -->
+
+<!-- Bootstrap JS (for carousel functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- BOOTSTRAP.MIN JS --> <!-- MAGNIFIC POPUP JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="~/vote/vendor/counter/waypoints-min.js"></script><!-- WAYPOINTS JS -->
+	<script src="~/vote/vendor/counter/counterup.min.js"></script><!-- COUNTERUP JS -->
+    <script src="~/vote/vendor/imagesloaded/imagesloaded.js"></script><!-- IMAGESLOADED -->
+	<script src="~/vote/vendor/masonry/masonry-4.2.2.js"></script><!-- MASONRY -->
+	<script src="~/vote/vendor/masonry/masonry.filter.js"></script>
+	<script src="~/vote/vendor/lightgallery/js/lightgallery-all.min.js"></script><!-- LIGHTGALLERY -->
+	<script src="~/vote/vendor/swiper/swiper-bundle.min.js"></script><!-- OWL-CAROUSEL -->
+	<script src="~/vote/vendor/aos/aos.js"></script><!-- AOS -->
+	<script src="~/vote/js/ic.carousel.js"></script><!-- OWL-CAROUSEL -->
+	<script src="~/vote/js/custom.js"></script><!-- CUSTOM JS -->
+	<script src="~/vote/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/vote/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

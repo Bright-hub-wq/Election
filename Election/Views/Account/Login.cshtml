@@ -1,0 +1,148 @@
+﻿@model Election.ViewModel.LoginViewModel;
+@{
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<div class="main_div">
+    <div class="title">Login</div>
+    <form action="#">
+        <div class="input_box">
+            <input type="text" placeholder="Enter Email" required>
+            <div class="icon"><i class="fas fa-user"></i></div>
+        </div>
+        <div class="input_box">
+            <input type="password" placeholder="Password" required>
+            <div class="icon"><i class="fas fa-lock"></i></div>
+        </div>
+        <div class="input_box button">
+            <input type="submit" value="Login">
+        </div>
+        <div class="sign_up">
+            Don't Have An Account? <a href="Registeration">Register now</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+        display: grid;
+        height: 100vh;
+        place-items: center;
+        background: #f0f0f5; /* Brightened background color */
+    }
+
+    .main_div {
+        width: 450px; /* Increased width */
+        background: #ffffff;
+        padding: 40px; /* Increased padding */
+        border-radius: 8px; /* Increased border-radius */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increased shadow */
+    }
+
+        .main_div .title {
+            text-align: center;
+            font-size: 32px; /* Increased font size */
+            font-weight: 600;
+            color: #333; /* Brighter text color */
+        }
+
+    form {
+        margin-top: 30px; /* Increased margin-top */
+    }
+
+        form .input_box {
+            height: 55px; /* Increased height */
+            width: 100%;
+            position: relative;
+            margin-top: 20px; /* Increased margin-top */
+        }
+
+    .input_box input {
+        height: 100%;
+        width: 100%;
+        outline: none;
+        border: 1px solid #dcdcdc; /* Brighter border color */
+        border-radius: 6px; /* Increased border-radius */
+        padding-left: 50px; /* Increased padding */
+        font-size: 18px; /* Increased font size */
+        transition: all 0.3s ease;
+    }
+
+        .input_box input:focus {
+            border-color: #6200ea; /* Brighter focus color */
+        }
+
+    .input_box .icon {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        color: #888; /* Brighter icon color */
+    }
+
+    form .option_div {
+        margin-top: 15px; /* Increased margin-top */
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .option_div .check_box {
+        display: flex;
+        align-items: center;
+    }
+
+    .option_div span {
+        margin-left: 8px; /* Increased margin-left */
+        font-size: 16px;
+        color: #333;
+    }
+
+    .option_div .forget_div a {
+        font-size: 16px;
+        color: #6200ea; /* Brighter link color */
+    }
+
+    .button input {
+        padding-left: 0;
+        background: #6200ea;
+        color: white;
+        border: none;
+        font-size: 20px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s linear;
+    }
+
+        .button input:hover {
+            background: #4954d0;
+        }
+
+    form .sign_up {
+        text-align: center;
+        margin-top: 30px; /* Increased margin-top */
+    }
+
+    .sign_up a {
+        color: #6200ea; /* Brighter link color */
+    }
+
+    form a {
+        text-decoration: none;
+    }
+
+        form a:hover {
+            text-decoration: underline;
+        }
+</style>
