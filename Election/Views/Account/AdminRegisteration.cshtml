@@ -1,135 +1,142 @@
-﻿<section class="container body1">
+﻿@model Election.ViewModel.ApplicationUserViewModel
+
+@{
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+    ViewData["Title"] = "AdminRegistration";
+}
+
+<section class="container body1">
     <header>Admin Registration</header>
-    <form action="#" class="form">
+    <form asp-action="Registeration" method="post" class="form">
         <div class="form-row">
+            <input type="hidden" asp-for="Role" value="Admin" />
+           
             <div class="input-box">
-                <label>First Name</label>
-                <input type="text" placeholder="Enter first name" required />
+                <label asp-for="Email">Email Address</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Enter email address" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="input-box">
-                <label>Last Name</label>
-                <input type="text" placeholder="Enter last name" required />
+                <label asp-for="PhoneNumber">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" required />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="input-box">
-                <label>Email Address</label>
-                <input type="email" placeholder="Enter email address" required />
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Enter password" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="input-box">
-                <label>EPhone Number</label>
-                <input type="email" placeholder="Enter phone number" required />
-            </div>
-            <div class="input-box">
-                <label>Password</label>
-                <input type="password" placeholder="Enter password" required />
-            </div>
-            <div class="input-box">
-                <label>Confirm Password</label>
-                <input type="password" placeholder="Confirm password" required />
+                <label asp-for="ConfirmPassword">Confirm Password</label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm password" required />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
         </div>
         <div class="button-container">
-        <button type="submit" style="width:25%;">Register</button>
-        <p style="margin-top:12px; margin-bottom:0rem;">Already have an account? <a href="/Account/Login">Log in</a>.</p>
+            <button type="submit" style="width:25%;">Register</button>
+            <p style="margin-top:12px; margin-bottom:0rem;">Already have an account? <a href="/Account/Login">Log in</a>.</p>
         </div>
     </form>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: #f7f7f7;
-        }
-
-        .container {
-            position: relative;
-            max-width: 800px;
-            background: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-
-            .container header {
-                font-size: 1.8rem;
-                color: #333;
-                font-weight: 500;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
-        .form {
-            margin-top: 20px;
-        }
-
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .input-box {
-            flex: 1 1 calc(50% - 15px);
-            min-width: 200px;
-        }
-
-            .input-box label {
-                color: #333;
-                font-size: 0.9rem;
-                margin-bottom: 5px;
-                display: block;
-            }
-
-            .input-box input {
-                height: 45px;
-                width: 100%;
-                padding: 0 10px;
-                border: 1px solid #ddd;
-                border-radius: 6px;
-                font-size: 0.9rem;
-                color: #707070;
-            }
-
-                .input-box input:focus {
-                    border-color: #6200ea;
-                    box-shadow: 0 0 3px rgba(98, 0, 234, 0.2);
-                }
-
-        .form button {
-            height: 50px;
-            border: none;
-            border-radius: 25px;
-            color: #fff;
-            background: #6200ea;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-            .form button:hover {
-                background: #5200c8;
-            }
-
-        .form p {
-            text-align: center;
-        }
-
-        .form a {
-            color: #6200ea;
-        }
-
-            .form a:hover {
-                text-decoration: underline;
-            }
-            .button-container {
-                text-align: center;
-            }
-    </style>
 </section>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: #f7f7f7;
+    }
+
+    .container {
+        position: relative;
+        max-width: 800px;
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+        .container header {
+            font-size: 1.8rem;
+            color: #333;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+    .form {
+        margin-top: 20px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .input-box {
+        flex: 1 1 calc(50% - 15px);
+        min-width: 200px;
+    }
+
+        .input-box label {
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .input-box input {
+            height: 45px;
+            width: 100%;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #707070;
+        }
+
+            .input-box input:focus {
+                border-color: #6200ea;
+                box-shadow: 0 0 3px rgba(98, 0, 234, 0.2);
+            }
+
+    .form button {
+        height: 50px;
+        border: none;
+        border-radius: 25px;
+        color: #fff;
+        background: #6200ea;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+        .form button:hover {
+            background: #5200c8;
+        }
+
+    .form p {
+        text-align: center;
+    }
+
+    .form a {
+        color: #6200ea;
+    }
+
+        .form a:hover {
+            text-decoration: underline;
+        }
+
+    .button-container {
+        text-align: center;
+    }
+
+</style>

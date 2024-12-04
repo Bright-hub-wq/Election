@@ -1,32 +1,41 @@
 ﻿@model Election.ViewModel.LoginViewModel;
+
 @{
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
+
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
         @TempData["ErrorMessage"]
     </div>
 }
+
 <div class="main_div">
     <div class="title">Login</div>
-    <form action="#">
+    <form asp-action="Login" method="post">
         <div class="input_box">
-            <input type="text" placeholder="Enter Email" required>
+            <input type="email" asp-for="Email" placeholder="Enter Email" required />
             <div class="icon"><i class="fas fa-user"></i></div>
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
+
         <div class="input_box">
-            <input type="password" placeholder="Password" required>
+            <input type="password" asp-for="Password" placeholder="Password" required />
             <div class="icon"><i class="fas fa-lock"></i></div>
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
+
         <div class="input_box button">
-            <input type="submit" value="Login">
+            <input type="submit" value="Login" />
         </div>
+
         <div class="sign_up">
             Don't Have An Account? <a href="Registeration">Register now</a>
         </div>
     </form>
 </div>
+
 
 <style>
     * {

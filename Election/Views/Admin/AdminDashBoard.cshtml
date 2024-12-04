@@ -1,0 +1,136 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="admin-dashboard">
+    <!-- Header Section -->
+    <div class="header">
+        <h1 style="color:white;">Welcome to the Admin Dashboard</h1>
+        <p style="color:white;">Manage Your Election System With Ease!</p>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+        <!-- Manage Users Card -->
+        <div class="card">
+            <h3>Manage Users</h3>
+            <p>View And Manage User Accounts Efficiently.</p>
+            <form asp-action="ManageUsers" method="get">
+                <button type="submit" class="btn" style="border-radius:30px;">Manage Users</button>
+            </form>
+        </div>
+
+        <!-- Manage Elections Card -->
+        <div class="card">
+            <h3>Manage Elections</h3>
+            <p>Create, Edit, Or Manage Ongoing Elections.</p>
+            <form asp-action="ManageElections" method="get">
+                <button type="submit" class="btn" style="border-radius:30px;">Manage Elections</button>
+            </form>
+        </div>
+
+        <!-- View Reports Card -->
+        <div class="card">
+            <h3>Count Votes</h3>
+            <p>Track progress and ensure accurate election reporting.</p>
+                      <form asp-action="ViewReports" method="get">
+                <button type="submit" class="btn" style="border-radius:30px;">Count Votes</button>
+            </form>
+        </div>
+
+        <!-- Manage Results Card -->
+        <div class="card">
+            <h3>Manage Results</h3>
+            <p>Update and Publish election results in real-time.</p>
+            <form asp-action="ManageResults" method="get">
+                <button type="submit" class="btn" style="border-radius:30px;">Manage Results</button>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+
+    :root {
+        --white: #ffffff;
+        --gray-light: #f4f4f4;
+        --card-shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--gray-light);
+    }
+
+    .admin-dashboard {
+        padding: 30px;
+    }
+
+    .header {
+        background-color: var(--primary);
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            color:white;
+        }
+
+    .dashboard-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .card {
+        background-color: var(--white);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px var(--card-shadow);
+        transition: transform 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .card .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+            .card .btn:hover {
+                background-color: #4b00b2; /* Slightly darker shade of primary */
+            }
+</style>
+

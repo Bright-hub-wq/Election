@@ -31,8 +31,6 @@ namespace Election.Controllers
         // GET: Register
         [HttpGet]
         public IActionResult Registeration() => View();
-        public IActionResult VerifyPhoneNumber() => View();
-
 
         public IActionResult AdminRegisteration() => View();
 
@@ -44,7 +42,7 @@ namespace Election.Controllers
 
             if (Models.Password != Models.ConfirmPassword)
             {
-                ModelState.AddModelError("ConfirmPassword", "The password and confirm password do not match.");
+                ModelState.AddModelError("ConfirmPassword", "passwords must match.");
                 return View(Models);
             }
 
@@ -54,7 +52,19 @@ namespace Election.Controllers
                 ModelState.AddModelError("Email", "Email already exists.");
                 return View(Models);
             }
+            if(Models.Role.Contains("Voter"))
+            {
+                // Age validation
+                var today = DateTime.Today;
+                var age = today.Year - Models.DateOfBirth.Value.Year;
+                if (Models.DateOfBirth > today.AddYears(-age)) age--;
 
+                if (age < 18)
+                {
+                    ModelState.AddModelError("DateOfBirth", "You must be at least 18 years old to register.");
+                    return View(Models);
+                }
+            }
             var addUser = await _userHelper.CreateUserAsync(Models);
             if (addUser != null)
             {
@@ -62,13 +72,14 @@ namespace Election.Controllers
                 //await _userManager.AddToRoleAsync(addUser, "Voter");
 
                 TempData["Message"] = "Registered Successfully";
-                await _signInManager.PasswordSignInAsync(addUser, Models.Password, true, true);
+                //await _signInManager.PasswordSignInAsync(addUser, Models.Password, true, true);
 
                 return RedirectToAction("Login", "Account");
             }
 
             return View(Models);
         }
+
 
         // GET: Login
         public IActionResult Login() => View();
@@ -88,7 +99,7 @@ namespace Election.Controllers
                 return RedirectToAction("Registeration", "Account");
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false).ConfigureAwait(false);
 
             if (result.Succeeded)
             {
@@ -96,13 +107,13 @@ namespace Election.Controllers
 
                 if (role.Contains("Admin"))
                 {
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("AdminDashBoard", "Admin");
                 }
 
 
                 if (role.Contains("Voter"))
                 {
-                    return RedirectToAction("Index", "Vote");
+                    return RedirectToAction("VoterDashBoard", "Vote");
                 }
             }
 

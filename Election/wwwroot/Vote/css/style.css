@@ -31562,6 +31562,88 @@ body {
         margin: 12px 0;
     }
 }
+/* Base styles for the Voter Dashboard */
+.dashboard {
+    padding: 20px;
+    background-color: #f4f7fb;
+    font-family: 'Arial', sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    .header h1 {
+        font-size: 2.5rem;
+        color: var(--primary);  Using var--primary color here 
+    }
+
+    .header p {
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+    .card h3 {
+        font-size: 1.5rem;
+        color: var(--primary);  Heading using the primary color 
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        font-size: 1rem;
+        color: #555;
+    }
+
+.btn-vote, .btn-results, .btn-history {
+    background-color: var(--primary);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .btn-vote:hover, .btn-results:hover, .btn-history:hover {
+        background-color: #003f8c;  Darker shade of primary color on hover 
+    }
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;  Stack the cards on smaller screens 
+    }
+    :root {
+        --primary: #6200ea;  Example purple color 
+    }
+
+    body {
+        background-color: #f4f7fb;
+        color: #333;
+    }
+
+
+    /* Responsive Design for small screens */
+    @media (max-width: 768px) {
+        .dashboard-content {
+            grid-template-columns: 1fr;
+        }
+    }
 
 
 
@@ -31569,4 +31651,7 @@ body {
 
 
 
-/*# sourceMappingURL=style.css.map */
+
+
+
+    /*# sourceMappingURL=style.css.map */

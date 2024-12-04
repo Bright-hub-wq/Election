@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Voter Dashboard";
+}
+
+<div class="dashboard">
+    <div class="header">
+        <h1>Welcome to the Voter Dashboard</h1>
+        <p>Your voting journey starts here!</p>
+    </div>
+
+    <div class="dashboard-content">
+        <!-- Elections Card -->
+        <div class="card">
+            <h3>Elections</h3>
+            <p>View Ongoing Elections And Elections That Have Ended</p>
+            <!-- Use asp-action for handling the button click -->
+            <form asp-action="ViewElections" method="get">
+                <button type="submit" class="btn-vote" style="border-radius:30px;">View Elections</button>
+            </form>
+        </div>
+
+        <!-- Current Election Card -->
+        <div class="card">
+            <h3>Current Election</h3>
+            <p>Election For President, Voting Is Open!</p>
+            <!-- Use asp-action for handling the button click -->
+            <form asp-action="VoteNow" method="get">
+                <button type="submit" class="btn-vote" style="border-radius:30px;">Vote Now</button>
+            </form>
+        </div>
+
+        <!-- Election Results Card -->
+        <div class="card">
+            <h3>Election Results</h3>
+            <p>View Results Of The Elections That Have Ended.</p>
+            <!-- Use asp-action for handling the button click -->
+            <form asp-action="ViewResults" method="get">
+                <button type="submit" class="btn-results" style="border-radius:30px;">View Results</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
