@@ -3,6 +3,36 @@
     ViewData["Title"] = "Voter Dashboard";
 }
 
+
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>EasyVote</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
 <div class="dashboard">
     <div class="header">
         <h1>Welcome to the Voter Dashboard</h1>
@@ -20,16 +50,6 @@
             </form>
         </div>
 
-        <!-- Current Election Card -->
-        <div class="card">
-            <h3>Current Election</h3>
-            <p>Election For President, Voting Is Open!</p>
-            <!-- Use asp-action for handling the button click -->
-            <form asp-action="VoteNow" method="get">
-                <button type="submit" class="btn-vote" style="border-radius:30px;">Vote Now</button>
-            </form>
-        </div>
-
         <!-- Election Results Card -->
         <div class="card">
             <h3>Election Results</h3>
@@ -39,6 +59,18 @@
                 <button type="submit" class="btn-results" style="border-radius:30px;">View Results</button>
             </form>
         </div>
+
+
+        <!-- Current Election Card -->
+        <div class="card">
+            <h3>Vote Hostory</h3>
+            <p>View Your Past Votes And Keep Track Of Ur Voting History.</p>
+            <!-- Use asp-action for handling the button click -->
+            <form asp-action="VoteNow" method="get">
+                <button type="submit" class="btn-vote" style="border-radius:30px;">View History</button>
+            </form>
+        </div>
+
     </div>
 </div>
 

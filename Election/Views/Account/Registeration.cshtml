@@ -2,6 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
+    ViewData["Title"] = "Registeration Page";
 }
 @if (TempData["ErrorMessage"] != null)
 {
@@ -9,6 +10,13 @@
         @TempData["ErrorMessage"]
     </div>
 }
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>Home</span>
+        </a>
+    </div>
+</nav>
 <section class="container body1">
     <header>Voter Registration</header>
     <form asp-action="Registeration" method="post" class="form" novalidate>

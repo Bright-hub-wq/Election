@@ -30,6 +30,7 @@ public class UserHelper : IUserHelper
             user.LastName = applicationUser.LastName;
             user.DateOfBirth = applicationUser.DateOfBirth; 
             user.IsDeactivated = false;
+            user.Gender = applicationUser.Gender;
             user.PhoneNumberConfirmed = false;
 
             var createdUser = await _userManager.CreateAsync(user, applicationUser.Password).ConfigureAwait(false);
@@ -45,6 +46,8 @@ public class UserHelper : IUserHelper
 
         return null;
     }
+
+
 }
 
 }

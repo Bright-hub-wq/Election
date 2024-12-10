@@ -1,0 +1,180 @@
+﻿
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>EasyVote</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Vote/VoterDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+
+
+    <style>
+        :root {
+            --primary: #6200ea;
+            --secondary: #4b00b2;
+            --white: #ffffff;
+            --gray-light: #f9f9f9;
+            --text-dark: #333333;
+            --card-shadow: rgba(0, 0, 0, 0.15);
+            --success: #4caf50;
+            --upcoming: #ff9800;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gray-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .elections-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .card:hover {
+            transform: scale(1.07);
+            box-shadow: 0 12px 25px var(--card-shadow);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: var(--white);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .card-badge.upcoming {
+            background-color: var(--upcoming);
+        }
+
+        .card h2 {
+            font-size: 26px;
+            margin: 20px 30px 10px;
+            color: var(--primary);
+        }
+
+        .card p {
+            margin: 10px 30px;
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .card .btn {
+            display: block;
+            margin: 20px 30px;
+            padding: 12px 20px;
+            text-align: center;
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .card .btn:hover {
+            background-color: var(--secondary);
+        }
+
+
+            .card h2 {
+                font-size: 22px;
+            }
+
+            .card p {
+                font-size: 14px;
+            }
+
+            .card .btn {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+
+
+    <div class="container">
+        <h1>View Elections</h1>
+        <div class="elections-list">
+            <!-- Ongoing Election Card -->
+            <div class="card">
+                <div class="card-badge">Ongoing</div>
+                <h2>Presidential Election 2024</h2>
+                <p>Vote for the next President of the United States and shape the future of the nation.</p>
+                <p><strong>Deadline:</strong> December 10, 2024</p>
+                <a href="/Elections/Vote/1" class="btn">Vote Now</a>
+            </div>
+
+            <!-- Upcoming Election Card -->
+            <div class="card">
+                <div class="card-badge upcoming">Upcoming</div>
+                <h2>Senate Elections 2024</h2>
+                <p>Participate in your state’s Senate elections to elect your representatives.</p>
+                <p><strong>Starts:</strong> December 15, 2024</p>
+                <a href="/Elections/Details/2" class="btn">View Details</a>
+            </div>
+
+            <!-- Ongoing Election Card -->
+            <div class="card">
+                <div class="card-badge">Ongoing</div>
+                <h2>Local Council Elections</h2>
+                <p>Choose the council members who will represent your community’s interests locally.</p>
+                <p><strong>Deadline:</strong> December 20, 2024</p>
+                <a href="/Elections/Vote/3" class="btn">Vote Now</a>
+            </div>
+
+            <!-- Upcoming Election Card -->
+            <div class="card">
+                <div class="card-badge upcoming">Upcoming</div>
+                <h2>Referendum on Climate Policy</h2>
+                <p>Make your voice heard in this referendum about the future of climate change action.</p>
+                <p><strong>Starts:</strong> January 5, 2025</p>
+                <a href="/Elections/Details/4" class="btn">View Details</a>
+            </div>
+        </div>
+    </div>
+

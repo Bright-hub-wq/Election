@@ -31645,6 +31645,32 @@ body {
         }
     }
 
+   
+
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .elections-list {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 22px;
+
+
+            @media (max-width: 768px) {
+                .cards-container {
+                    grid-template-columns: 1fr 1fr; /* 2 columns on medium screens */
+                }
+            }
+
+            @media (max-width: 480px) {
+                .cards-container {
+                    grid-template-columns: 1fr; /* 1 column on small screens */
+                    padding: 10px;
+                }
 
 
 
@@ -31654,4 +31680,5 @@ body {
 
 
 
-    /*# sourceMappingURL=style.css.map */
+
+                /*# sourceMappingURL=style.css.map */

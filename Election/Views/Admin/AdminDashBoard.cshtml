@@ -3,6 +3,35 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>EasyVote</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
 <div class="admin-dashboard">
     <!-- Header Section -->
     <div class="header">
@@ -16,7 +45,7 @@
         <div class="card">
             <h3>Manage Users</h3>
             <p>View And Manage User Accounts Efficiently.</p>
-            <form asp-action="ManageUsers" method="get">
+            <form asp-action="Voters" asp-controller="Vote" method="get">
                 <button type="submit" class="btn" style="border-radius:30px;">Manage Users</button>
             </form>
         </div>
@@ -33,7 +62,7 @@
         <!-- View Reports Card -->
         <div class="card">
             <h3>Count Votes</h3>
-            <p>Track progress and ensure accurate election reporting.</p>
+            <p>Track progress And Ensure Accurate Election Reporting.</p>
                       <form asp-action="ViewReports" method="get">
                 <button type="submit" class="btn" style="border-radius:30px;">Count Votes</button>
             </form>
@@ -42,7 +71,7 @@
         <!-- Manage Results Card -->
         <div class="card">
             <h3>Manage Results</h3>
-            <p>Update and Publish election results in real-time.</p>
+            <p>Update and Publish Election Results In Real-Time.</p>
             <form asp-action="ManageResults" method="get">
                 <button type="submit" class="btn" style="border-radius:30px;">Manage Results</button>
             </form>

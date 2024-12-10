@@ -1,28 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Election.ViewModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Election.Controllers
 {
     public class AdminController : Controller
     {
-        public IActionResult AdminDashBoard()
-        {
-            return View();
-        }
-        public IActionResult ManageUsers()
-        {
-            return View();
-        }
-        public IActionResult ManageElections()
-        {
-            return View();
-        }
-        public IActionResult CountVotes()
-        {
-            return View();
-        }
-        public IActionResult ManageResults()
-        {
-            return View();
-        }
+        public IActionResult AdminDashBoard() => View();
+        public IActionResult ManageUsers() => View();
+        public IActionResult ManageElections() => View();
+        public IActionResult CountVotes() => View();
+        public IActionResult ManageResults() => View();
+        public IActionResult Details() => View();
+
+        
+
+
+
+
+
+
     }
+
+
 }

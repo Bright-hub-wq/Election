@@ -11,6 +11,7 @@ namespace Election.Models
         public virtual string? LastName { get; set; }
         
         public bool IsDeactivated { get; set; }
+        public string? Gender { get; set; }
         public DateTime? DateRegistered { get; set; }
         public DateTime? DateOfBirth { get; set; }
         [NotMapped]

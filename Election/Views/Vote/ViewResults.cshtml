@@ -1,0 +1,150 @@
+﻿
+    <style>
+        :root { 
+            --primary: #6200ea;
+            --secondary: #4b00b2;
+            --white: #ffffff;
+            --gray-light: #f9f9f9;
+            --text-dark: #333333;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --success: #4caf50;
+            --danger: #f44336;
+            --progress-bg: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gray-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .winner {
+            text-align: center;
+            background-color: var(--success);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th,
+        table td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--progress-bg);
+        }
+
+        table th {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .progress-container {
+            background-color: var(--progress-bg);
+            height: 12px;
+            border-radius: 6px;
+            position: relative;
+            margin: 8px 0;
+        }
+
+        .progress-bar {
+            background-color: var(--success);
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-bar.losing {
+            background-color: var(--danger);
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: var(--secondary);
+        }
+
+       
+
+            table th,
+            table td {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+
+            .winner {
+                font-size: 16px;
+                padding: 10px;
+            }
+    </style>
+
+    <div class="container">
+        <h1>Election Results</h1>
+
+        <!-- Winner Section -->
+        <div class="winner">
+            Winner: <span>@Model.WinnerName</span>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>Votes</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var candidate in Model.Candidates)
+                {
+                    <tr>
+                        <td>@candidate.Name</td>
+                        <td>@candidate.Votes</td>
+                        <td>
+                            <div class="progress-container">
+                                <div class="progress-bar @(candidate.IsWinning ? "" : "losing")" style="width: @(candidate.Percentage)%;">
+                                </div>
+                            </div>
+                            @candidate.Percentage%
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a asp-action="Index" class="btn-back">Back to Elections</a>
+    </div>

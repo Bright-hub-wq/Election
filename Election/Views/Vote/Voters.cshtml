@@ -1,0 +1,170 @@
+﻿@model IEnumerable<Election.ViewModel.ApplicationUserViewModel>
+@{
+    ViewData["Title"] = "Voters";
+}
+
+<style>
+    .navbar{
+        background-color:var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>EasyVote</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+ <style>
+    :root {
+        --primary: #6200ea;
+        --secondary: #4b00b2;
+        --white: #ffffff;
+        --gray-light: #f9f9f9;
+        --text-dark: #333333;
+        --card-shadow: rgba(0, 0, 0, 0.1);
+        --danger: #f44336;
+        --success: #4caf50;
+        --card-background: #f7f7f7;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--gray-light);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top:20px;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+        gap: 20px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .user-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px var(--card-shadow);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .user-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px var(--card-shadow);
+    }
+
+    .user-card h3 {
+        margin-bottom: 10px;
+    }
+
+    .user-card p {
+        color: var(--text-dark);
+        margin: 10px 0;
+    }
+
+    .user-card .btn {
+        padding: 8px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+        display: inline-block;
+        margin: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+
+
+    .btn-delete {
+        background-color: var(--danger);
+        color: var(--white);
+    }
+
+    .btn-delete:hover {
+        background-color: #d32f2f;
+    }
+
+    .btn-details {
+        background-color: var(--primary);
+        color: var(--white);
+    }
+
+    .btn-details:hover {
+        background-color: var(--primary);
+    }
+
+
+
+        .user-card {
+            width: 100%;
+        }
+
+        .btn {
+            font-size: 12px;
+            padding: 6px 10px;
+        }
+
+</style>
+
+
+<h1>Manage Users</h1>
+
+ <div class="cards-container">
+    <!-- Card 1 -->
+    @foreach(var user in Model) 
+   {
+        <div class="user-card">
+            <h3>@user.FirstName @user.LastName</h3>
+           
+
+            <div>
+                <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-details">Details</a>
+            </div>
+        </div>
+   }
+</div>  
+
+
+
+
+
+
+ 
+
+
+
+
+   
+
+
+
+
+
+
+
+
