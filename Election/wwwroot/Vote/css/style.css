@@ -31660,17 +31660,28 @@ body {
             font-size: 22px;
 
 
-            @media (max-width: 768px) {
-                .cards-container {
-                    grid-template-columns: 1fr 1fr; /* 2 columns on medium screens */
-                }
-            }
+@media (max-width: 768px) {
+.cards-container {
+    grid-template-columns: 1fr 1fr; /* 2 columns on medium screens */
+}
+}
 
-            @media (max-width: 480px) {
-                .cards-container {
-                    grid-template-columns: 1fr; /* 1 column on small screens */
-                    padding: 10px;
-                }
+@media (max-width: 480px) {
+.cards-container {
+    grid-template-columns: 1fr; /* 1 column on small screens */
+    padding: 10px;
+}
+@media (max-width: 768px) {
+.navbar-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: #6200ea;
+    border-radius: 5px;
+    padding: 10px;
+}
 
 
 
@@ -31681,4 +31692,9 @@ body {
 
 
 
-                /*# sourceMappingURL=style.css.map */
+
+
+
+
+
+                        /*# sourceMappingURL=style.css.map */

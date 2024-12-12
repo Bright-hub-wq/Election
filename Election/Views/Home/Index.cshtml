@@ -15,6 +15,24 @@
 </style>
 
 <div class="page-wraper">
+	<style>
+		.navbar {
+			background-color: var(--primary);
+		}
+
+			.navbar a.navbar-brand {
+				text-decoration: none;
+				color: var(--white);
+				/* Ensure no hover effects */
+			}
+
+				.navbar a.navbar-brand:hover {
+					color: none; /* Retain the current color */
+					text-decoration: none; /* No underline or style change */
+					cursor: default; /* Prevent pointer cursor if needed */
+				}
+	</style>
+
 	<nav class="navbar">
 		<div class="navbar-left">
 			<a class="navbar-brand" href="/">
@@ -30,11 +48,13 @@
 			<li class="navbar-item"><a href="/Home/About">About Us</a></li>
 			<li class="navbar-item"><a href="/Home/Team">Team</a></li>
 			<li class="navbar-item"><a href="/Home/Services">Services</a></li>
-			<li class="navbar-item"><a href="/Home/ContactUs">Contact Us</a></li>
+			<li class="navbar-item"><a href="/Home/ContactUs">Contact Us</a></li> 
+
 			<li class="navbar-item"><a href="/Account/Registeration">Register</a></li>
 			<li class="navbar-item"><a href="/Account/Login">Login</a></li>
 		</ul>
 	</nav>
+
 
 	<script>
 		// Toggle Navbar Menu

@@ -13,4 +13,5 @@ public class AppDbContext:IdentityDbContext
     public DbSet<Candidate> Candidate { get; set; }
     public DbSet<Ballot> Ballot { get; set; }
     public DbSet<Vote> Vote { get; set; }
+
 }

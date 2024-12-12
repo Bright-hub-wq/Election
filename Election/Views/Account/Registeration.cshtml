@@ -1,7 +1,7 @@
 ﻿@model Election.ViewModel.ApplicationUserViewModel;
 
 @{
-    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Registeration Page";
 }
 @if (TempData["ErrorMessage"] != null)
@@ -9,15 +9,8 @@
     <div class="alert alert-danger">
         @TempData["ErrorMessage"]
     </div>
-}
-<nav class="navbar">
-    <div class="navbar-left">
-        <a class="navbar-brand" href="/">
-            <span>Home</span>
-        </a>
-    </div>
-</nav>
-<section class="container body1">
+} 
+ <section class="container body1">
     <header>Voter Registration</header>
     <form asp-action="Registeration" method="post" class="form" novalidate>
         <div class="form-row">
@@ -222,4 +215,4 @@
                 text-decoration: underline;
             }
     </style>
-</section>
+</section> 
