@@ -34,120 +34,101 @@ namespace Election.Controllers
         {
             return View();
         }
-        public IActionResult Voters()
+      
+        public IActionResult Index()
         {
-            var voters = _context.ApplicationUser.Where(x => !x.IsDeactivated)
-                .Select(v => new ApplicationUserViewModel()
-                {
-                    //Id = v.Id,
-                    FirstName = v.FirstName,
-                    LastName = v.LastName,
-                    DateOfBirth = v.DateOfBirth,
-                    Email = v.Email,
-                    Gender = v.Gender,
-                }).ToList();
+            var voterRoleId = _context.Roles.FirstOrDefault(r => r.Name == "Voter")?.Id;
 
-            var votersList = voters.Where(v => v.Role.Contains("Voter")).ToList();
-            return View(votersList);
+            if (voterRoleId == null)
+            {
+                return View(new List<ApplicationUserViewModel>()); // Empty list
+            }
+
+            var voters = (from user in _context.ApplicationUser
+                          join userRole in _context.UserRoles on user.Id equals userRole.UserId
+                          where userRole.RoleId == voterRoleId && !user.IsDeactivated
+                          select new ApplicationUserViewModel
+                          {
+                              UserId = user.Id,
+                              FirstName = user.FirstName,
+                              LastName = user.LastName,
+                              DateOfBirth = user.DateOfBirth,
+                              Email = user.Email,
+                              Gender = user.Gender
+                          }).ToList();
+
+            return View(voters);
         }
 
-        //public IActionResult Voters()
-        //{
-        //    var voterRoleId = _context.Roles.FirstOrDefault(r => r.Name == "Voter")?.Id;
-
-        //    if (voterRoleId == null)
-        //    {
-        //        return View(new List<ApplicationUserViewModel>()); // Return an empty list if the role is not found.
-        //    }
-
-        //    var voters = _context.ApplicationUser
-        //        .Where(x => !x.IsDeactivated &&
-        //                    _context.UserRoles.Any(ur => ur.RoleId == voterRoleId))
-        //        .Select(v => new ApplicationUserViewModel()
-        //        {
-        //            Id = v.Id,
-        //            FirstName = v.FirstName,
-        //            LastName = v.LastName,
-        //            DateOfBirth = v.DateOfBirth,
-        //            Email = v.Email,
-        //            Gender = v.Gender,
-        //        }).ToList();
-
-        //    return View(voters);
-        //}
-
-
+        
         [HttpGet]
-        public IActionResult Details(int Id)
+        public async Task<IActionResult> Delete(string userId)
         {
-            if (Id == 0)
+            if (string.IsNullOrEmpty(userId))
             {
-                TempData["ErrorMessage"] = "Invalid voter ID.";
-                return RedirectToAction("Index");
+                TempData["ErrorMessage"] = "User ID is null or empty.";
+                return RedirectToAction(nameof(Index)); // Redirect to Index instead of showing NotFound
             }
 
-            var voter = _context.ApplicationUser
-                .Where(x => !x.IsDeactivated && x.Id == Id)
-                .Select(v => new ApplicationUserViewModel()
+            var voter = await _context.ApplicationUser
+                .AsNoTracking()
+                .FirstOrDefaultAsync(v => v.Id == userId);
+
+            if (voter == null)
+            {
+                TempData["ErrorMessage"] = $"No user found with ID {userId}.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Map to ViewModel
+            var viewModel = new ApplicationUserViewModel
+            {
+                UserId = voter.Id,
+                FirstName = voter.FirstName,
+                LastName = voter.LastName,
+                Email = voter.Email
+            };
+
+            return View(viewModel);
+        }
+
+     
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                TempData["ErrorMessage"] = "User ID is null or empty.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            try
+            {
+                var user = await _context.ApplicationUser.FindAsync(userId);
+
+                if (user == null)
                 {
-                    FirstName = v.FirstName,
-                    LastName = v.LastName,
-                    Email = v.Email,
-                    Gender = v.Gender,
-                    DateOfBirth = v.DateOfBirth,
-                }).ToList();
+                    TempData["ErrorMessage"] = $"No user found with ID {userId}.";
+                    return RedirectToAction(nameof(Index));
+                }
 
-            if (voter == null)
+                _context.ApplicationUser.Remove(user);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = $"Successfully deleted user: {user.FirstName} {user.LastName}.";
+            }
+            catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Voter not found.";
-                return RedirectToAction("Index");
+                TempData["ErrorMessage"] = $"An error occurred while deleting the user: {ex.Message}";
             }
 
-            return View(voter);
-        }
-
-        // GET: Voter/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (string.IsNullOrEmpty(id))
-            {
-                TempData["ErrorMessage"] = "Voter ID was not provided for deletion.";
-                return View("NotFound");
-            }
-
-            var voter = await _context.Vote.AsNoTracking().FirstOrDefaultAsync(v => v.Id == id);
-
-            if (voter == null)
-            {
-                TempData["ErrorMessage"] = $"No voter found with ID {id}.";
-                return View("NotFound");
-            }
-
-            return View(voter);
-        }
-
-        // POST: Voter/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var voter = await _context.Vote.FindAsync(id);
-
-            if (voter == null)
-            {
-                TempData["ErrorMessage"] = $"No voter found with ID {id}.";
-                return View("NotFound");
-            }
-
-            _context.Vote.Remove(voter);
-            await _context.SaveChangesAsync();
-
-            TempData["SuccessMessage"] = $"Successfully deleted voter: {voter.FirstName} {voter.LastName}.";
             return RedirectToAction(nameof(Index));
         }
 
 
-
+       
     }
 
 

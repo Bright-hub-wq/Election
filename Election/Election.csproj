@@ -42,6 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\DetailsController.cs" />
+    <Compile Remove="Controllers\ElectionController.cs" />
     <Compile Remove="Views\Account\AdminRegisteration.cs" />
   </ItemGroup>
 

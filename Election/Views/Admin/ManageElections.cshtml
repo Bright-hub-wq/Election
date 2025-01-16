@@ -1,0 +1,170 @@
+﻿@* <div class="container">
+    <h2>Manage Elections</h2>
+    <div class="row">
+        <div class="col">
+            <a href="/Admin/AddCandidate" class="btn btn-primary">Register Candidate</a>
+        </div>
+        <div class="col">
+            <a href="/Admin/ViewCandidates" class="btn btn-secondary">View All Candidates</a>
+        </div>
+        <div class="col">
+            <a href="/Admin/ElectionSettings" class="btn btn-info">Election Settings</a>
+        </div>
+    </div>
+</div>
+
+ *@
+
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>Home</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
+@* @* <div class="container py-5 election-management" style="margin-top:100px;">
+    <h2 class="text-center mb-4">Manage Elections</h2>
+    <div class="row g-3">
+        <div class="col-12 col-md-4">
+            <a href="/Admin/AddCandidate" class="btn btn-primary w-100 py-3 shadow-sm">Register Candidate</a>
+        </div>
+        <div class="col-12 col-md-4">
+            <a href="/Admin/ViewCandidates" class="btn btn-secondary w-100 py-3 shadow-sm">View All Candidates</a>
+        </div>
+        <div class="col-12 col-md-4">
+            <a href="/Admin/ElectionSettings" class="btn btn-info w-100 py-3 shadow-sm">Election Settings</a>
+        </div>
+    </div>
+</div>
+<style>
+    .election-management {
+        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+        .election-management h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .election-management .btn {
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .election-management .btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            .election-management .btn:active {
+                transform: scale(0.98);
+            }
+
+</style> *@ 
+
+
+
+
+ 
+
+<div class="container py-5 election-management">
+    <h2 class="text-center mb-4">Manage Elections</h2>
+    <div class="row g-4">
+        <div class="col-12 col-md-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Register Candidate</h5>
+                    <p class="card-text text-muted">Add new candidates to the election roster.</p>
+                    <a href="/Admin/CreateCandidate" class="btn btn-primary w-100">Get Started</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">View All Candidates</h5>
+                    <p class="card-text text-muted">See a complete list of registered candidates.</p>
+                    <a href="/Admin/ManageCandidates" class="btn btn-secondary w-100">View List</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Election Settings</h5>
+                    <p class="card-text text-muted">Customize election dates, policies, and more.</p>
+                    <a href="/Admin/CreateElection" class="btn btn-success w-100">Create New Election</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- New Button Row -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <a href="/Admin/ViewElections" class="btn btn-warning w-100">View Created Elections</a>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .election-management h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.card {
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+</style>  
+
+
+
+
+

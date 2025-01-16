@@ -15,9 +15,9 @@
                         <h5 class="card-title">@user.FirstName @user.LastName</h5>
                         <p class="card-text"><strong>Email:</strong> @user.Email</p>
                         <p class="card-text"><strong>Gender:</strong> @user.Gender</p>
-                        <a asp-controller="Vote" asp-action="Delete" asp-route-id="@user.Id"
+                        <a asp-controller="Vote" asp-action="Delete" asp-route-id="@user.UserId"
                            class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash-alt"></i> Delete
+                            <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
                 </div>

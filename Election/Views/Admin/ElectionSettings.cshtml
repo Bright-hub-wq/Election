@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Election Settings";
+}
+ 
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>EasyVote</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
+
+@* 
+@{
+    ViewBag.Title = "Election Settings";
+}
+
+<div class="container py-4">
+    <h2 style="text-align:center;">Set Election Details</h2>
+    <form method="post" action="/Admin/ElectionSettings">
+        <div class="form-group">
+            <label for="ElectionName">Election Name</label>
+            <input type="text" name="ElectionName" id="ElectionName" class="form-control" required />
+        </div>
+        <div class="form-group mt-3">
+            <label for="StartDate">Start Date</label>
+            <input type="date" name="StartDate" id="StartDate" class="form-control" required />
+        </div>
+        <div class="form-group mt-3">
+            <label for="EndDate">End Date</label>
+            <input type="date" name="EndDate" id="EndDate" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Save Election</button>
+    </form>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success mt-4">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger mt-4">@TempData["ErrorMessage"]</div>
+    }
+</div>  *@
+
+
+
+@{
+    ViewBag.Title = "Election Settings";
+}
+
+<div class="container py-4">
+    <h2 class="text-center mb-4">Set Election Details</h2>
+    <form method="post" action="/Admin/SaveElection">
+        <div class="form-group mb-3">
+            <label for="ElectionName">Election Name</label>
+            <input type="text" name="ElectionName" id="ElectionName" class="form-control" placeholder="Enter election name" required />
+        </div>
+        <div class="form-group mb-3">
+            <label for="StartDate">Start Date</label>
+            <input type="date" name="StartDate" id="StartDate" class="form-control" required />
+        </div>
+        <div class="form-group mb-3">
+            <label for="EndDate">End Date</label>
+            <input type="date" name="EndDate" id="EndDate" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mt-4">Save Election</button>
+    </form>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success mt-4">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger mt-4">@TempData["ErrorMessage"]</div>
+    }
+</div>
+

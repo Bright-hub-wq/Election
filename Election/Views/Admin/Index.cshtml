@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ElectionVoteViewModel>
+
+@foreach (var election in Model)
+{
+    <div class="election">
+        <h3>@election.Title</h3>
+        <p>Start Date: @election.StartDate.ToString("d")</p>
+        <p>End Date: @election.EndDate.ToString("d")</p>
+
+        <form asp-action="Vote" method="post">
+            <input type="hidden" name="ElectionId" value="@election.ElectionId" />
+
+            @foreach (var candidate in election.Candidates)
+            {
+                <div class="candidate">
+                    <img src="@candidate.PhotoPath" alt="@candidate.Name's photo" style="width: 100px; height: 100px;" />
+                    <div>
+                        <input type="radio" name="CandidateId" value="@candidate.Id" />
+                        <strong>@candidate.Name</strong> (@candidate.Party)
+                    </div>
+                </div>
+            }
+
+            <button type="submit" class="btn btn-primary">Vote</button>
+        </form>
+    </div>
+}

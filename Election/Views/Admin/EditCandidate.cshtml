@@ -1,0 +1,94 @@
+﻿@* @model Candidate
+
+<div class="container">
+    <h2>Edit Candidate</h2>
+    <form asp-controller="Admin" asp-action="EditCandidate" method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input type="text" name="Name" value="@Model.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="Party">Party</label>
+            <input type="text" name="Party" value="@Model.Party" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="Position">Position</label>
+            <input type="text" name="Position" value="@Model.Position" class="form-control" />
+        </div>
+
+        
+            
+            <a asp-action="ManageCandidates" class="btn btn-secondary">Cancel</a>
+       
+        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+    </form>
+</div>
+
+ *@
+ @model Candidate
+ 
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>EasyVote</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+        <a class="nav-link" asp-controller="Home" asp-action="Candidates">View Candidates</a>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
+
+<div class="container mt-4">
+    <h2>Edit Candidate</h2>
+    <form asp-action="EditCandidate" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Party" class="form-label">Party</label>
+            <input asp-for="Party" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Position" class="form-label">Position</label>
+            <input asp-for="Position" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Photo</label>
+            <input asp-for="PhotoPath" type="hidden" />
+            <input type="file" name="photo" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <img src="@Model.PhotoPath" alt="@Model.Name" class="img-thumbnail" style="max-width: 200px;" />
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="ManageCandidates" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+

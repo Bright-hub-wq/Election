@@ -1,0 +1,22 @@
+﻿@model Candidate
+
+<div class="container mt-4">
+    <h2>Delete Candidate</h2>
+
+    <div class="card">
+        <div class="card-body text-center">
+            <img src="@Model.PhotoPath" alt="@Model.Name's photo" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" />
+            <h5>@Model.Name</h5>
+            <p><strong>Party:</strong> @Model.Party</p>
+            <p><strong>Position:</strong> @Model.Position</p>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+
+    <form asp-action="DeleteCandidateConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+        <p>Are you sure you want to delete this candidate?</p>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="ManageCandidates" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

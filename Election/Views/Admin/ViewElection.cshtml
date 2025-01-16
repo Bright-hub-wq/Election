@@ -1,0 +1,38 @@
+﻿@model ElectionModel
+
+@{
+    ViewBag.Title = "View Election";
+}
+
+<div class="container py-4">
+    <h2 class="text-center">Election: @Model.Title</h2>
+
+    <p><strong>Start Date:</strong> @Model.StartDate.ToString("yyyy-MM-dd")</p>
+    <p><strong>End Date:</strong> @Model.EndDate.ToString("yyyy-MM-dd")</p>
+
+    <h3 class="mt-4">Candidates</h3>
+
+    <div class="list-group">
+        @foreach (var candidate in Model.Candidates)
+        {
+            <div class="list-group-item">
+                <h5>@candidate.Name (@candidate.Party)</h5>
+                <p>@candidate.Description</p>
+                <p><strong>Votes:</strong> @candidate.Votes</p>
+                @if (candidate.IsInElection)
+                {
+                    <form method="post" action="@Url.Action("CastVote", "Admin")">
+                        <input type="hidden" name="candidateId" value="@candidate.Id" />
+                        <input type="hidden" name="userId" value="@User.Identity.Name" /> <!-- Assuming user is logged in -->
+                        <button type="submit" class="btn btn-primary">Vote</button>
+                    </form>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">Not in Election</span>
+                }
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Candidate>
+
+<div class="container">
+    <h2>Vote for a Candidate</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info">@TempData["Message"]</div>
+    }
+
+    <form asp-action="SubmitVote" method="post">
+        <div class="row">
+            @foreach (var candidate in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="@candidate.PhotoPath" class="card-img-top" alt="Candidate Photo" style="height:200px; object-fit:cover;" />
+                        <div class="card-body">
+                            <h5 class="card-title">@candidate.Name</h5>
+                            <p><strong>Party:</strong> @candidate.Party</p>
+                            <p><strong>Position:</strong> @candidate.Position</p>
+                            <button type="submit" name="candidateId" value="@candidate.Id" class="btn btn-primary mt-3">Vote</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </form>
+</div>
+

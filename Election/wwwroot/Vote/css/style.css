@@ -31684,6 +31684,16 @@ body {
 }
 
 
+    @media (max-width: 768px) {
+        .navbar-menu {
+            display: none;
+            flex-direction: column;
+            background-color: var(--primary);
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+        }
 
 
 
@@ -31696,5 +31706,4 @@ body {
 
 
 
-
-                        /*# sourceMappingURL=style.css.map */
+        /*# sourceMappingURL=style.css.map */

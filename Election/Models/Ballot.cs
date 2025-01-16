@@ -11,4 +11,6 @@ namespace Election.Models
         public ICollection<Candidate>? Candidates { get; set; }
 
     }
+
 }
+

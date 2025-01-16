@@ -22,6 +22,57 @@ namespace Election.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Candidate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("BallotId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("ElectionId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsInElection")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Party")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Votes")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BallotId");
+
+                    b.HasIndex("ElectionId");
+
+                    b.ToTable("Candidates");
+                });
+
             modelBuilder.Entity("Election.Models.Ballot", b =>
                 {
                     b.Property<int>("Id")
@@ -44,7 +95,7 @@ namespace Election.Migrations
                     b.ToTable("Ballot");
                 });
 
-            modelBuilder.Entity("Election.Models.Candidate", b =>
+            modelBuilder.Entity("Election.Models.ElectionCandidate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,20 +103,59 @@ namespace Election.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("BallotId")
+                    b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Party")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ElectionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Votes")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BallotId");
+                    b.HasIndex("CandidateId");
 
-                    b.ToTable("Candidate");
+                    b.HasIndex("ElectionId");
+
+                    b.ToTable("ElectionCandidates");
+                });
+
+            modelBuilder.Entity("Election.Models.ElectionModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsResultsReleased")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("WinnerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Elections");
                 });
 
             modelBuilder.Entity("Election.Models.Vote", b =>
@@ -76,23 +166,23 @@ namespace Election.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("BallotId")
+                    b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CandidateId")
+                    b.Property<int>("ElectionId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime?>("VoteDate")
+                    b.Property<DateTime>("VoteDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BallotId");
-
                     b.HasIndex("CandidateId");
+
+                    b.HasIndex("ElectionId");
 
                     b.HasIndex("UserId");
 
@@ -307,6 +397,9 @@ namespace Election.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -328,34 +421,59 @@ namespace Election.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Election.Models.Candidate", b =>
+            modelBuilder.Entity("Candidate", b =>
                 {
-                    b.HasOne("Election.Models.Ballot", "Ballot")
+                    b.HasOne("Election.Models.Ballot", null)
                         .WithMany("Candidates")
-                        .HasForeignKey("BallotId")
+                        .HasForeignKey("BallotId");
+
+                    b.HasOne("Election.Models.ElectionModel", "Election")
+                        .WithMany("Candidates")
+                        .HasForeignKey("ElectionId");
+
+                    b.Navigation("Election");
+                });
+
+            modelBuilder.Entity("Election.Models.ElectionCandidate", b =>
+                {
+                    b.HasOne("Candidate", "Candidate")
+                        .WithMany()
+                        .HasForeignKey("CandidateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Ballot");
+                    b.HasOne("Election.Models.ElectionModel", "Election")
+                        .WithMany("ElectionCandidates")
+                        .HasForeignKey("ElectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Candidate");
+
+                    b.Navigation("Election");
                 });
 
             modelBuilder.Entity("Election.Models.Vote", b =>
                 {
-                    b.HasOne("Election.Models.Ballot", "Ballot")
+                    b.HasOne("Candidate", "Candidate")
                         .WithMany()
-                        .HasForeignKey("BallotId");
+                        .HasForeignKey("CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Election.Models.Candidate", "Candidate")
+                    b.HasOne("Election.Models.ElectionModel", "Election")
                         .WithMany()
-                        .HasForeignKey("CandidateId");
+                        .HasForeignKey("ElectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Election.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
-                    b.Navigation("Ballot");
-
                     b.Navigation("Candidate");
+
+                    b.Navigation("Election");
 
                     b.Navigation("User");
                 });
@@ -414,6 +532,13 @@ namespace Election.Migrations
             modelBuilder.Entity("Election.Models.Ballot", b =>
                 {
                     b.Navigation("Candidates");
+                });
+
+            modelBuilder.Entity("Election.Models.ElectionModel", b =>
+                {
+                    b.Navigation("Candidates");
+
+                    b.Navigation("ElectionCandidates");
                 });
 #pragma warning restore 612, 618
         }

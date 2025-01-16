@@ -1,0 +1,143 @@
+﻿@model Candidate
+@{
+    ViewBag.Title = "Add Candidate";
+    var electionId = ViewBag.ElectionId;
+}
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>EasyVote</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+
+    // Clear validation errors on input
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('input', function () {
+                const validationMessage = input.parentElement.querySelector('.text-danger');
+                if (validationMessage) {
+                    validationMessage.textContent = '';
+                }
+            });
+        });
+
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+            select.addEventListener('change', function () {
+                const validationMessage = select.parentElement.querySelector('.text-danger');
+                if (validationMessage) {
+                    validationMessage.textContent = '';
+                }
+            });
+        });
+    });
+</script>
+
+<!-- Outer Container -->
+<div class="container mt-5">
+    <h2 style="text-align:center; margin-top:15px;">Add Candidate</h2>
+    <form asp-action="AddCandidate" method="post" enctype="multipart/form-data">
+        <!-- Candidate Name -->
+        <div class="form-group mb-3">
+            <label for="Name">Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Enter candidate's name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Political Party Dropdown (Editable) -->
+        <div class="form-group mb-3">
+            <label for="Party">Political Party</label>
+            <input list="partyOptions" asp-for="Party" class="form-control" placeholder="Enter or select Political Party" />
+            <datalist id="partyOptions">
+                <option value="APC"></option>
+                <option value="PDP"></option>
+                <option value="LABOUR PARTY"></option>
+                <option value="APGA"></option>
+                <option value="NNPP"></option>
+                <option value="APP"></option>
+            </datalist>
+            <span asp-validation-for="Party" class="text-danger"></span>
+        </div>
+
+        <!-- Position Dropdown (Editable) -->
+        <div class="form-group mb-3">
+            <label for="Position">Position</label>
+            <input list="positionOptions" asp-for="Position" class="form-control" placeholder="Enter or select Position" />
+            <datalist id="positionOptions">
+                <option value="President"></option>
+                <option value="Governor"></option>
+                <option value="Senator"></option>
+                <option value="Member of Parliament"></option>
+                <option value="Mayor"></option>
+            </datalist>
+            <span asp-validation-for="Position" class="text-danger"></span>
+        </div>
+
+
+        <!-- Candidate Description -->
+        <div class="form-group mb-3">
+            <label for="Description">Description</label>
+            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter brief description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <!-- Candidate Photo -->
+        <div class="form-group mb-3">
+            <label for="Photo">Photo</label>
+            <input type="file" name="photo" class="form-control" accept="image/*" />
+            <span asp-validation-for="PhotoPath" class="text-danger"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Add Candidate</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

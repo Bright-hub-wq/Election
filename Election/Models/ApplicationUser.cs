@@ -6,12 +6,12 @@ namespace Election.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public virtual Guid Id {  get; set; }
-        public virtual string? FirstName { get; set; }
-        public virtual string? LastName { get; set; }
-        
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+
         public bool IsDeactivated { get; set; }
         public string? Gender { get; set; }
+        public string? Country { get; set; }
         public DateTime? DateRegistered { get; set; }
         public DateTime? DateOfBirth { get; set; }
         [NotMapped]

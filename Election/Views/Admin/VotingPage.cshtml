@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Voting Page";
+}
+
+<div class="container py-4">
+    <h2 class="text-center">Vote Now</h2>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <p class="lead">Please select an election to vote in:</p>
+
+    <div class="list-group">
+        @foreach (var election in Model)
+        {
+            <a href="@Url.Action("ViewElection", "Admin", new { id = election.Id })" class="list-group-item list-group-item-action">
+                @election.Title (@election.StartDate.ToString("yyyy-MM-dd") - @election.EndDate.ToString("yyyy-MM-dd"))
+            </a>
+        }
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<dynamic>
+
+<div class="container">
+    <h2>Election Results</h2>
+    <div class="row">
+        @foreach (var result in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="@result.Candidate.PhotoPath" class="card-img-top" alt="Candidate Photo" style="height:200px; object-fit:cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@result.Candidate.Name</h5>
+                        <p><strong>Party:</strong> @result.Candidate.Party</p>
+                        <p><strong>Votes:</strong> @result.Votes</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,53 @@
+﻿@model List<dynamic>
+
+<div class="container">
+    <h2>Election Results</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Candidate</th>
+                <th>Party</th>
+                <th>Position</th>
+                <th>Votes</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in Model)
+            {
+                <tr>
+                    <td>@result.Name</td>
+                    <td>@result.Party</td>
+                    <td>@result.Position</td>
+                    <td>@result.Votes</td>
+                    <td>
+                        <script>
+                            let totalVotes = @Model.Sum(r => r.Votes);
+                            let percent = (parseFloat(@result.Votes) / totalVotes * 100).toFixed(2);
+                            document.write(`${percent}%`);
+                        </script>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const table = document.querySelector("table tbody");
+        const rows = Array.from(table.rows);
+
+        rows.sort((a, b) => {
+            const votesA = parseInt(a.cells[3].innerText);
+            const votesB = parseInt(b.cells[3].innerText);
+            return votesB - votesA; // Sort descending by votes
+        });
+
+        rows.forEach(row => table.appendChild(row)); // Reorder rows
+    });
+
+</script>
+
+
+
+

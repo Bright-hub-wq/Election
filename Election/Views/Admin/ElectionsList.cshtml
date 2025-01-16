@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Elections List";
+}
+
+<div class="container py-4">
+    <h2>Elections</h2>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Election Title</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>Actions</th>
+                }
+                <th>Vote</th>
+                <th>Manage Candidates</th> <!-- Added column for Manage Candidates -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var election in Model)
+            {
+                <tr>
+                    <td>@election.Title</td>
+                    <td>@election.StartDate.ToShortDateString()</td>
+                    <td>@election.EndDate.ToShortDateString()</td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a href="/Admin/EditElection/@election.Id" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="/Admin/DeleteElection/@election.Id" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure you want to delete this election?');">Delete</a>
+                        </td>
+                    }
+                    <td>
+                        @if (election.HasVoted)
+                        {
+                            <button class="btn btn-secondary btn-sm" disabled>Voted</button>
+                        }
+                        else
+                        {
+                            <form method="post" action="/Elections/Vote">
+                                <input type="hidden" name="ElectionId" value="@election.Id" />
+                                <button type="submit" class="btn btn-primary btn-sm">Vote</button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <!-- Added Manage Candidates button -->
+                        <a href="/Admin/ManageCandidates?electionId=@election.Id" class="btn btn-info btn-sm">Manage Candidates</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
