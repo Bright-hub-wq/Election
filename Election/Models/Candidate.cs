@@ -24,10 +24,12 @@ public class Candidate
 
     public string? PhotoPath { get; set; }
 
+
+    public ICollection<ElectionCandidate>? ElectionCandidates { get; set; }
     public int Votes { get; set; } = 0;
 
     public bool IsInElection { get; set; } = false;
-   // public int VoteCount { get; set; } // Optional, depends on whether you calculate votes dynamically
+    public int VoteCount { get; set; } // Optional, depends on whether you calculate votes dynamically
     //public ICollection<Vote>? Votes { get; set; }
     public int? ElectionId { get; set; }
 

@@ -11,7 +11,7 @@
 <nav class="navbar">
     <div class="navbar-left">
         <a class="navbar-brand" href="/">
-            <span>EasyVote</span>
+            <span style="color:white;">Home</span>
         </a>
     </div>
     <div class="navbar-toggle" id="navbar-toggle">
@@ -31,7 +31,7 @@
         menu.classList.toggle('active');
     });
 </script>
-
+ 
 <div class="admin-dashboard">
     <!-- Header Section -->
     <div class="header">
@@ -59,14 +59,7 @@
             </form>
         </div>
 
-        <!-- View Reports Card -->
-        <div class="card">
-            <h3>Count Votes</h3>
-            <p>Track progress And Ensure Accurate Election Reporting.</p>
-                      <form asp-action="ViewReports" method="get">
-                <button type="submit" class="btn" style="border-radius:30px;">Count Votes</button>
-            </form>
-        </div>
+       
 
         <!-- Manage Results Card -->
         <div class="card">
@@ -76,6 +69,7 @@
                 <button type="submit" class="btn" style="border-radius:30px;">Manage Results</button>
             </form>
         </div>
+     
     </div>
 </div>
 <style>
@@ -161,5 +155,21 @@
             .card .btn:hover {
                 background-color: #4b00b2; /* Slightly darker shade of primary */
             }
-</style>
+
+    .dashboard-content {
+        display: flex;
+        justify-content: center; /* Centers the cards horizontally */
+        gap: 20px; /* Adds space between the cards */
+        padding: 20px;
+        flex-wrap: wrap; /* Ensures cards wrap on smaller screens */
+    }
+
+    .card {
+        flex: 1 1 300px; /* Ensures the cards are responsive with a minimum size */
+        max-width: 300px; /* Caps the width of each card */
+    }
+
+
+</style> 
+ 
 

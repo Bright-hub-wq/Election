@@ -14,18 +14,26 @@ namespace Election.Models
         //public int ElectionId { get; set; }
         [MaxLength(500)]
         public string? Description { get; set; }
-        public ICollection<Candidate> Candidates { get; set; }
-
+        public ICollection<Candidate>? Candidates { get; set; }
+        public bool VotesCounted { get; set; }
         public DateTime StartDate { get; set; }
-        public bool? IsResultsReleased { get; set; } = false;
+        public bool? IsResultReleased { get; set; } = false;
 
         // This will represent the status based on the current date
-
+        public bool IsReleased { get; set; }
         public int? WinnerId { get; set; }
 
         public DateTime EndDate { get; set; }
+        public string? Status { get; set; }
 
-        public ICollection<ElectionCandidate> ElectionCandidates { get; set; } = new List<ElectionCandidate>();
+        public string? WinnerName { get; set; }
+        public int? WinnerVotes { get; set; }
+        public string? WinnerParty { get; set; }
+        public string? WinnerPhotoPath { get; set; }
+        public ICollection<ElectionCandidate>? ElectionCandidates { get; set; }
+        public int TotalVotes { get; set; } = 0;
+        public bool ResultsReleased { get;  set; }
+       // public string Name { get;  set; }
 
         public bool IsOngoing()
         {

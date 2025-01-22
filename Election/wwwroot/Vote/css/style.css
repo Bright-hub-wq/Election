@@ -31699,10 +31699,20 @@ body {
 
 
 
+        @media (max-width: 768px) {
+            .col-md-3 {
+                flex: 0 0 100%; /* Full width on small devices */
+            }
+        }
 
 
 
-
+        @media (max-width: 1200px) {
+            .d-flex {
+                flex-wrap: wrap; /* Ensures cards stack on smaller screens */
+                justify-content: center;
+            }
+        }
 
 
 

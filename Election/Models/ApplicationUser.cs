@@ -18,5 +18,6 @@ namespace Election.Models
         public string Name => FirstName + " " + LastName;
         [NotMapped]
         public string? Role { get; set; }
+        public string? VoterId { get;  set; }
     }
 }

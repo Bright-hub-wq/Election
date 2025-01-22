@@ -18,7 +18,7 @@ namespace Election.Models
 
         // Candidate the user voted for
         [Required]
-        public int CandidateId { get; set; }
+        public int? CandidateId { get; set; }
         [ForeignKey(nameof(CandidateId))]
         public virtual Candidate? Candidate { get; set; }
 
@@ -31,6 +31,9 @@ namespace Election.Models
         public int ElectionId { get; set; }
         [ForeignKey(nameof(ElectionId))]
         public virtual ElectionModel? Election { get; set; }
+        public DateTime VoteTime { get;  set; }
+        public string? VoterId { get;  set; }
+        public DateTime VotedAt { get;  set; }
     }
 }
 

@@ -4,6 +4,7 @@ using Election.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Election.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250117185207_AddIsReleasedToElection")]
+    partial class AddIsReleasedToElection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,9 +150,6 @@ namespace Election.Migrations
                     b.Property<bool?>("IsResultReleased")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ResultsReleased")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -196,8 +195,7 @@ namespace Election.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CandidateId")
-                        .IsRequired()
+                    b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
                     b.Property<int>("ElectionId")
@@ -211,12 +209,6 @@ namespace Election.Migrations
 
                     b.Property<DateTime>("VoteTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("VotedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VoterId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -458,9 +450,6 @@ namespace Election.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VoterId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
@@ -480,7 +469,7 @@ namespace Election.Migrations
             modelBuilder.Entity("Election.Models.ElectionCandidate", b =>
                 {
                     b.HasOne("Candidate", "Candidate")
-                        .WithMany("ElectionCandidates")
+                        .WithMany()
                         .HasForeignKey("CandidateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -570,11 +559,6 @@ namespace Election.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Candidate", b =>
-                {
-                    b.Navigation("ElectionCandidates");
                 });
 
             modelBuilder.Entity("Election.Models.Ballot", b =>

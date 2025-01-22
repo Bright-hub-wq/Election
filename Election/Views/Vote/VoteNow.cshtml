@@ -1,0 +1,63 @@
+﻿@* @model Election.ViewModel.CandidateViewModel
+
+<h1 class="text-center">Vote for @Model.Name</h1>
+
+<div class="card mx-auto" style="width: 18rem;">
+    <img src="@Url.Content(Model.PhotoPath)" class="card-img-top" alt="@Model.Name">
+    <div class="card-body text-center">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Party</p>
+        <form asp-action="ConfirmVote" method="post">
+            <input type="hidden" name="CandidateId" value="@Model.Id" />
+            <button type="submit" class="btn btn-success">Confirm Vote</button>
+        </form>
+    </div>
+</div>
+ *@
+ @using Election.ViewModel
+@model VoteNowViewModel
+
+<h2>@Model.ElectionTitle</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (Model.Candidates != null && Model.Candidates.Any())
+{
+    <form method="post" action="@Url.Action("VoteForCandidate", "Vote", new { electionId = Model.ElectionId })">
+        @foreach (var candidate in Model.Candidates)
+        {
+            <div>
+                <input type="radio" name="candidateId" value="@candidate.Id" />
+                <label>@candidate.Name - @candidate.Party</label>
+            </div>
+        }
+        <button type="submit">Submit Vote</button>
+    </form>
+}
+else
+{
+    <p>No candidates available for this election.</p>
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -4,6 +4,7 @@ using Election.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Election.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250121181219_AddVoterIdToApplicationUser")]
+    partial class AddVoterIdToApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,9 +150,6 @@ namespace Election.Migrations
                     b.Property<bool?>("IsResultReleased")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ResultsReleased")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -196,8 +195,7 @@ namespace Election.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CandidateId")
-                        .IsRequired()
+                    b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
                     b.Property<int>("ElectionId")

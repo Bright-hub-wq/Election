@@ -1,4 +1,4 @@
-﻿
+﻿@* 
     <style>
         :root { 
             --primary: #6200ea;
@@ -148,3 +148,25 @@
 
         <a asp-action="Index" class="btn-back">Back to Elections</a>
     </div>
+ *@
+
+
+
+ @using Election.ViewModel
+ @model CandidateViewModel
+
+<h2>Confirm Your Vote</h2>
+
+<div class="card">
+    <div class="card-body">
+        <img src="@Model.PhotoPath" alt="Photo" style="width:100px;height:100px;" />
+        <h3>@Model.Name</h3>
+        <p>Party: @Model.Party</p>
+    </div>
+</div>
+
+<form method="post" action="@Url.Action("ConfirmVote", "Vote")">
+    <input type="hidden" name="candidateId" value="@Model.Id" />
+    <button type="submit" class="btn btn-success">Submit Vote</button>
+    <a href="@Url.Action("ViewElections", "Vote")" class="btn btn-secondary">Cancel</a>
+</form>

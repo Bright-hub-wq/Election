@@ -1,0 +1,37 @@
+﻿
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span style="color:white;">Home</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
+@{
+    ViewData["Title"] = "No Results Found";
+}
+
+<h1 style="text-align:center;">No Results Released</h1>
+<p style="text-align:center;">No Election Result Have Been Released Yet.</p>
+<a class="btn btn-primary" style="text-align:center;" asp-controller="Vote" asp-action="VoterDashboard">Go Back to Dashboard</a>

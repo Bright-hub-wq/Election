@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Election.Models
 {
@@ -13,9 +14,11 @@ namespace Election.Models
 
         [StringLength(100)]
         public string? Position { get; set; }
+        public int ElectionId { get; set; }
 
         [MaxLength(500)]
         public string? Description { get; set; }
+        public List<SelectListItem>? AvailableElections { get; set; }
 
         public IFormFile? Photo { get; set; }
         public string? PhotoPath { get; set; } // Path to store in the database

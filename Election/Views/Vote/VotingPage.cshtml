@@ -1,0 +1,91 @@
+﻿@* @using Election.ViewModel
+@model VotingViewModel
+
+@{
+    ViewBag.Title = "Vote for Candidates";
+}
+
+<h2>@Model.ElectionTitle</h2>
+<p>@Model.ElectionDescription</p>
+
+<!-- Display Error Messages -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<!-- Display Success Message -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div class="row">
+    @foreach (var candidate in Model.Candidates)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="@candidate.PhotoPath" alt="@candidate.Name" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@candidate.Name</h5>
+                    <p class="card-text">@candidate.Description</p>
+                    <p class="card-text"><strong>Party:</strong> @candidate.Party</p>
+                    <form asp-controller="Vote" asp-action="Vote" method="post">
+                        <input type="hidden" name="candidateId" value="@candidate.Id" />
+                        <input type="hidden" name="electionId" value="@Model.ElectionId" />
+                        <button type="submit" class="btn btn-primary">Vote</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Vote Submitted</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @TempData["SuccessMessage"]
+            </div>
+            <div class="modal-footer">
+                <!-- Update this button to close the modal and redirect -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="closeModalAndRedirect()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Show the success modal if a success message exists
+        @if (TempData["SuccessMessage"] != null)
+        {
+            @:$('#successModal').modal('show');
+        }
+                        });
+
+        function closeModalAndRedirect() {
+            // Hide the modal
+            $('#successModal').modal('hide');
+
+            // Redirect to the elections page after the modal fades out
+            setTimeout(function () {
+                window.location.href = '@Url.Action("ViewElections", "Election")';
+            }, 300); // Timeout to allow for modal fade effect
+        }
+    </script>
+}
+
+
+ *@

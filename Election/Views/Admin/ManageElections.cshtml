@@ -1,20 +1,4 @@
-﻿@* <div class="container">
-    <h2>Manage Elections</h2>
-    <div class="row">
-        <div class="col">
-            <a href="/Admin/AddCandidate" class="btn btn-primary">Register Candidate</a>
-        </div>
-        <div class="col">
-            <a href="/Admin/ViewCandidates" class="btn btn-secondary">View All Candidates</a>
-        </div>
-        <div class="col">
-            <a href="/Admin/ElectionSettings" class="btn btn-info">Election Settings</a>
-        </div>
-    </div>
-</div>
-
- *@
-
+﻿
 <style>
     .navbar {
         background-color: var(--primary);
@@ -88,81 +72,101 @@
                 transform: scale(0.98);
             }
 
-</style> *@ 
+</style> *@
 
-
-
-
- 
 
 <div class="container py-5 election-management">
     <h2 class="text-center mb-4">Manage Elections</h2>
-    <div class="row g-4">
-        <div class="col-12 col-md-4">
-            <div class="card shadow border-0">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Register Candidate</h5>
-                    <p class="card-text text-muted">Add new candidates to the election roster.</p>
-                    <a href="/Admin/CreateCandidate" class="btn btn-primary w-100">Get Started</a>
-                </div>
+    <div class="d-flex flex-nowrap justify-content-center gap-3">
+        <!-- Register Candidate Card -->
+        <div class="card text-center shadow border-0" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Register Candidate</h5>
+                <p class="card-text text-muted">Add new candidates to the election roster.</p>
+                <a href="/Admin/CreateCandidate" class="btn btn-primary w-100">Get Started</a>
             </div>
         </div>
-        <div class="col-12 col-md-4">
-            <div class="card shadow border-0">
-                <div class="card-body text-center">
-                    <h5 class="card-title">View All Candidates</h5>
-                    <p class="card-text text-muted">See a complete list of registered candidates.</p>
-                    <a href="/Admin/ManageCandidates" class="btn btn-secondary w-100">View List</a>
-                </div>
+
+        <!-- View All Candidates Card -->
+        <div class="card text-center shadow border-0" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">View All Candidates</h5>
+                <p class="card-text text-muted">See a complete list of registered candidates.</p>
+                <a href="/Admin/ManageCandidates" class="btn btn-primary w-100">View List</a>
             </div>
         </div>
-        <div class="col-12 col-md-4">
-            <div class="card shadow border-0">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Election Settings</h5>
-                    <p class="card-text text-muted">Customize election dates, policies, and more.</p>
-                    <a href="/Admin/CreateElection" class="btn btn-success w-100">Create New Election</a>
-                </div>
+
+        <!-- Election Settings Card -->
+        <div class="card text-center shadow border-0" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Election Settings</h5>
+                <p class="card-text text-muted">Customize election dates, policies, and more.</p>
+                <a href="/Admin/CreateElection" class="btn btn-primary w-100">Create New Election</a>
             </div>
         </div>
-    </div>
-    <!-- New Button Row -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <a href="/Admin/ViewElections" class="btn btn-warning w-100">View Created Elections</a>
+
+        <!-- View Created Elections Card -->
+        <div class="card text-center shadow border-0" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">View Created Elections</h5>
+                <p class="card-text text-muted">See all created elections and manage them.</p>
+                <a href="/Admin/ViewElections" class="btn btn-primary w-100">View Elections</a>
+            </div>
         </div>
     </div>
 </div>
 
-
 <style>
     .election-management h2 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    color: #343a40;
-}
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        color: #343a40;
+    }
 
-.card {
-    border-radius: 10px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+    .card {
+        border-radius: 10px;
+        padding: 20px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
 
-.card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-}
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #343a40;
+    }
 
-.card-text {
-    font-size: 0.9rem;
-    color: #6c757d;
-}
+    .card-text {
+        font-size: 1rem;
+        color: #6c757d;
+    }
 
-</style>  
+    .btn {
+        border-radius: 30px;
+        padding: 10px;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-success:hover,
+    .btn-warning:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .d-flex {
+        gap: 1.5rem; /* Adds spacing between cards */
+    }
+
+</style>
+
+
+
+
 
 
 

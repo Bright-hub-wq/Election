@@ -12,7 +12,7 @@
 <nav class="navbar">
     <div class="navbar-left">
         <a class="navbar-brand" href="/">
-            <span>EasyVote</span>
+            <span style="color:white;">Home</span>
         </a>
     </div>
     <div class="navbar-toggle" id="navbar-toggle">
@@ -51,18 +51,19 @@
             </form>
         </div>
 
-        <!-- Election Results Card -->
+           <!-- Election Results Card -->
         <div class="card">
             <h3>Election Results</h3>
             <p>View Results Of The Elections That Have Ended.</p>
             <!-- Use asp-action for handling the button click -->
-            <form asp-action="ViewResults" method="get">
+            <form asp-action="ReleasedElections" method="get">
                 <button type="submit" class="btn-results" style="border-radius:30px;">View Results</button>
             </form>
-        </div>
+        </div> 
 
 
-        <!-- Current Election Card -->
+
+       @*  <!-- Current Election Card -->
         <div class="card">
             <h3>Vote Hostory</h3>
             <p>View Your Past Votes And Keep Track Of Ur Voting History.</p>
@@ -70,11 +71,25 @@
             <form asp-action="VoteNow" method="get">
                 <button type="submit" class="btn-vote" style="border-radius:30px;">View History</button>
             </form>
-        </div>
+        </div> *@
 
     </div>
 </div>
 
+<style>
+    .dashboard-content {
+        display: flex;
+        justify-content: center; /* Centers the cards horizontally */
+        gap: 20px; /* Adds space between the cards */
+        padding: 20px;
+        flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+    }
+
+    .card {
+        flex: 1 1 300px; /* Ensures the cards are responsive with a minimum size */
+        max-width: 300px; /* Caps the width of each card */
+    }
+</style>
 
 
 

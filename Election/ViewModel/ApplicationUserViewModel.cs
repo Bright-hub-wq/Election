@@ -15,6 +15,7 @@ public class ApplicationUserViewModel
     public DateTime? DateRegistered { get; set; }
     public string? ConfirmPassword { get; set; }
     public string? PhoneNumber { get; set; }
+    public string? VoterId { get; set; } // Add this property
     public string? Gender { get; set; }
     public DateTime? DateOfBirth { get; set; }
     public string Name => FirstName + " " + LastName; 

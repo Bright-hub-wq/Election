@@ -1,5 +1,34 @@
 ﻿@model CreateCandidateViewModel
 
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span style="color:white;">Home</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
 <form asp-action="CreateCandidate" enctype="multipart/form-data">
     <div class="form-group">
         <label for="Name">Name</label>
@@ -21,6 +50,15 @@
         <label for="Photo">Candidate Photo</label>
         <input type="file" class="form-control" id="Photo" name="Photo" />
     </div>
-    <button type="submit" class="btn btn-primary">Create Candidate</button>
+    <button type="submit" class="btn btn-primary mt-4">Create Candidate</button>
 </form>
+
+
+
+
+
+
+
+
+
 

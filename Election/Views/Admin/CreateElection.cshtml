@@ -1,5 +1,33 @@
-﻿ @model Election.Models.CreateElectionViewModel
+﻿@*  @model Election.Models.CreateElectionViewModel
 
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>EasyVote</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
 <div class="container mt-4">
     <h2>Create Election</h2>
 
@@ -47,3 +75,94 @@
     </form>
 </div>
 
+ *@
+
+
+
+ @model Election.Models.CreateElectionViewModel
+
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+
+    .candidate-list img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border-radius: 50%;
+    }
+</style>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span style="color:white;">Home</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
+<div class="container mt-4">
+    <h2>Create Election</h2>
+    <form asp-action="CreateElection" method="post">
+        <!-- Election Details -->
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="StartDate" class="form-label"></label>
+            <input asp-for="StartDate" type="date" class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EndDate" class="form-label"></label>
+            <input asp-for="EndDate" type="date" class="form-control" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+
+        <!-- Candidate Selection -->
+        <div class="mb-3">
+            <h5>Select Candidates</h5>
+            @foreach (var candidate in Model.AvailableCandidates)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="SelectedCandidateIds" value="@candidate.Id" />
+                    <label class="form-check-label">
+                        <img src="@candidate.PhotoPath" alt="@candidate.Name" style="width: 50px; height: 50px; margin-right: 10px;" />
+                        @candidate.Name (@candidate.Party)
+                    </label>
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Election</button>
+    </form>
+
+</div>

@@ -380,7 +380,7 @@ namespace Election.Controllers
         public IActionResult ManageUsers() => View();
         public IActionResult ManageElections() => View();
         public IActionResult CountVotes() => View();
-        public IActionResult ManageResults() => View();
+        //public IActionResult ManageResults() => View();
         public IActionResult Details() => View();
 
         // Display all candidates
@@ -394,15 +394,73 @@ namespace Election.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> ViewElections()
-        //{
-        //    var elections = await _context.Elections
-        //        .Include(e => e.ElectionCandidates)
-        //        .ThenInclude(ec => ec.Candidate)
-        //        .ToListAsync();
 
-        //    return View(elections); // Ensure this matches the view's expected model
-        //}
+        public async Task<IActionResult> ManageResults()
+        {
+            // Fetch all elections to display
+            var elections = await _context.Elections
+                .Select(e => new ElectionViewModel
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate,
+                    HasEnded = e.EndDate < DateTime.Now,
+                    ResultsReleased = e.ResultsReleased
+                }).ToListAsync();
+
+            return View(elections);
+        }
+
+
+
+        public async Task<IActionResult> ReleaseResults(int electionId)
+        {
+            // Fetch the election along with its candidates
+            var election = await _context.Elections
+                .Include(e => e.Candidates)
+                .FirstOrDefaultAsync(e => e.Id == electionId);
+
+            // Check if the election exists
+            if (election == null)
+            {
+                TempData["ErrorMessage"] = "Election not found.";
+                return RedirectToAction("ManageResults");
+            }
+
+            // Check if the election has ended
+            if (election.EndDate > DateTime.UtcNow) // Replace EndDate with the actual property
+            {
+                TempData["ErrorMessage"] = "Election has not yet ended.";
+                return RedirectToAction("ManageResults");
+            }
+
+            // Fetch vote counts and prepare results
+            var results = election.Candidates
+                .Select(c => new CandidateResultViewModel
+                {
+                    CandidateId = c.Id,
+                    Name = c.Name,
+                    Party = c.Party,
+                    Photopath = c.PhotoPath, // Ensure the property names match
+                    VoteCount = c.VoteCount
+                })
+                .OrderByDescending(r => r.VoteCount) // Sort by vote count in descending order
+                .ToList();
+
+            // Mark the election results as released
+            election.ResultsReleased = true;
+            _context.Elections.Update(election);
+            await _context.SaveChangesAsync();
+
+            // Pass results to the ElectionResults view
+            return View("ElectionResults", results);
+        }
+
+
+
+
+
         public async Task<IActionResult> ViewElections()
         {
             var elections = await _context.Elections
@@ -431,19 +489,89 @@ namespace Election.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteElection(int id)
+
+        public async Task<IActionResult> ViewWinner(int electionId)
         {
-            var election = await _context.Elections.FindAsync(id);
-            if (election == null || !election.HasEnded())
+            // Fetch the election and its winner
+            var election = await _context.Elections
+                .Include(e => e.Candidates)
+                .FirstOrDefaultAsync(e => e.Id == electionId && e.ResultsReleased);
+
+            if (election == null)
             {
-                return NotFound("Election not found or cannot be deleted.");
+                TempData["ErrorMessage"] = "Election not found or results not released.";
+                return RedirectToAction("ReleasedElections");
             }
 
-            _context.Elections.Remove(election);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(ViewElections));
+            var winner = election.Candidates
+                .OrderByDescending(c => c.VoteCount)
+                .FirstOrDefault();
+
+            if (winner == null)
+            {
+                TempData["ErrorMessage"] = "No winner found for this election.";
+                return RedirectToAction("ReleasedElections");
+            }
+
+            var winnerViewModel = new WinnerViewModel
+            {
+                Name = winner.Name,
+                Party = winner.Party,
+                Photopath = winner.PhotoPath,
+                VoteCount = winner.VoteCount
+            };
+
+            return View(winnerViewModel);
         }
+
+
+        //public async Task<IActionResult> ViewWinner(int id)
+        //{
+        //    var election = await _context.Elections
+        //        .Include(e => e.Candidates)
+        //        .FirstOrDefaultAsync(e => e.Id == id);
+
+        //    if (election == null || election.Status != "Results Released")
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var winner = election.Candidates.OrderByDescending(c => c.VoteCount).FirstOrDefault();
+
+        //    var viewModel = new WinnerViewModel
+        //    {
+        //        ElectionTitle = election.Title,
+        //        Description = election.Description,
+        //        StartDate = election.StartDate,
+        //        EndDate = election.EndDate,
+        //        WinnerName = winner?.Name ?? "No Winner",
+        //        WinnerPhotoPath = winner?.PhotoPath ?? string.Empty,
+        //        WinnerParty = winner?.Party ?? "N/A",
+        //        WinnerVoteCount = winner?.VoteCount ?? 0
+        //    };
+
+        //    return View(viewModel);
+        //}
+
+
+
+
+
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> DeleteElection(int id)
+        //{
+        //    var election = await _context.Elections.FindAsync(id);
+        //    if (election == null || !election.HasEnded())
+        //    {
+        //        return NotFound("Election not found or cannot be deleted.");
+        //    }
+
+        //    _context.Elections.Remove(election);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(ViewElections));
+        //}
 
         [HttpGet]
         public async Task<IActionResult> EditElection(int id)
@@ -456,6 +584,48 @@ namespace Election.Controllers
 
             return View(election);
         }
+
+
+        public async Task<IActionResult> EndElection(int electionId)
+        {
+            var election = await _context.Elections
+                .Include(e => e.Candidates)
+                .FirstOrDefaultAsync(e => e.Id == electionId);
+
+            if (election == null)
+            {
+                return NotFound();
+            }
+
+            // Check if the election has already ended
+            if (election.Status == "Ended")
+            {
+                return RedirectToAction(nameof(ViewElections)); // Replace with correct action name
+            }
+
+            // Set election status to "Ended"
+            election.Status = "Ended";  // Ensure the 'Status' field is properly defined in your model
+            _context.Update(election);
+            await _context.SaveChangesAsync();
+
+            // Count the votes for each candidate and update the vote count
+            foreach (var candidate in election.Candidates)
+            {
+                var voteCount = await _context.Vote
+                    .Where(v => v.CandidateId == candidate.Id && v.ElectionId == electionId)
+                    .CountAsync();
+
+                // Update the candidate's vote count
+                candidate.Votes = voteCount;
+                _context.Update(candidate);
+            }
+
+            // Save changes to update the vote counts
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(ViewElections)); // Adjust as needed
+        }
+
 
 
 
@@ -477,78 +647,213 @@ namespace Election.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> CreateElection()
+        public IActionResult CreateCandidate()
         {
-            // Fetch candidates from the database
-            var candidates = await _context.Candidates.ToListAsync();
+            return View();
+        }
 
-            // Map the database entities to the view model
-            var candidateModels = candidates.Select(c => new CandidateModel
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCandidate(CreateCandidateViewModel model)
+        {
+            if (ModelState.IsValid)
             {
-                Id = c.Id,
-                Name = c.Name,
-                PhotoPath = c.PhotoPath,
-                Party = c.Party
-            }).ToList();
+                // Handle file upload logic
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", model.Photo?.FileName);
 
-            // Pass the mapped candidates to the view model
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.Photo.CopyToAsync(stream);
+                }
+
+                var candidate = new Candidate
+                {
+                    Name = model.Name,
+                    Party = model.Party,
+                    Position = model.Position,
+                    Description = model.Description,
+                    PhotoPath = "/images/" + model.Photo.FileName // Save file path
+                };
+
+                _context.Candidates.Add(candidate);
+                await _context.SaveChangesAsync();
+
+                // Use TempData to display a success message on the next page
+                TempData["SuccessMessage"] = "Candidate created successfully.";
+
+                // Redirect to the page where the admin can view all candidates
+                return RedirectToAction("ManageCandidates"); // Assumes that the action for viewing candidates is named "Index"
+            }
+
+            // If the model is invalid, return the same view with validation errors
+            return View(model);
+        }
+
+
+        [HttpGet]
+        public IActionResult CreateElection()
+        {
+            // Fetch all candidates to display in the form
+            var candidates = _context.Candidates
+                .Select(c => new CandidateViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Party = c.Party,
+                    PhotoPath = c.PhotoPath
+                }).ToList();
+
             var viewModel = new CreateElectionViewModel
             {
-                AvailableCandidates = candidateModels
+                AvailableCandidates = candidates
             };
 
             return View(viewModel);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateElection(CreateElectionViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                // Reload available candidates if the form submission is invalid
-                model.AvailableCandidates = await _context.Candidates
-                    .Select(c => new CandidateModel
-                    {
-                        Id = c.Id,
-                        Name = c.Name,
-                        Party = c.Party,
-                        Position = c.Position,
-                        PhotoPath = c.PhotoPath
-                    }).ToListAsync();
-
-                return View(model);
-            }
-
-            // Create the new election
-            var newElection = new ElectionModel
-            {
-                Title = model.Title,
-                Description = model.Description,
-                StartDate = model.StartDate,
-                EndDate = model.EndDate
-            };
-
-            _context.Elections.Add(newElection);
-            await _context.SaveChangesAsync();
-
-            // Assign selected candidates to the election
-            if (model.SelectedCandidateIds != null && model.SelectedCandidateIds.Any())
-            {
-                foreach (var candidateId in model.SelectedCandidateIds)
+                try
                 {
-                    _context.ElectionCandidates.Add(new ElectionCandidate
+                    // If StartDate is the same as EndDate, set EndDate to the same day as StartDate
+                    if (model.StartDate == model.EndDate)
                     {
-                        ElectionId = newElection.Id,
-                        CandidateId = candidateId
-                    });
+                        model.EndDate = model.StartDate.AddDays(1).AddSeconds(-1); // Set the end date to the end of the same day
+                    }
+
+                    // Create the Election object
+                    var election = new ElectionModel
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        StartDate = model.StartDate,
+                        EndDate = model.EndDate
+                    };
+
+                    // Save the election to generate its ID
+                    _context.Elections.Add(election);
+                    await _context.SaveChangesAsync();
+
+                    // Add selected candidates to the ElectionCandidates table and update ElectionId in Candidates table
+                    if (model.SelectedCandidateIds != null && model.SelectedCandidateIds.Any())
+                    {
+                        foreach (var candidateId in model.SelectedCandidateIds)
+                        {
+                            // Add to ElectionCandidates table
+                            var electionCandidate = new ElectionCandidate
+                            {
+                                ElectionId = election.Id,
+                                CandidateId = candidateId
+                            };
+                            _context.ElectionCandidates.Add(electionCandidate);
+
+                            // Update the ElectionId in the Candidates table
+                            var candidate = await _context.Candidates.FindAsync(candidateId);
+                            if (candidate != null)
+                            {
+                                candidate.ElectionId = election.Id; // Assuming ElectionId exists in the Candidates table
+                            }
+                        }
+
+                        await _context.SaveChangesAsync();
+                    }
+
+                    TempData["SuccessMessage"] = "Election created successfully!";
+                    return RedirectToAction("ViewElections");
                 }
-                await _context.SaveChangesAsync();
+                catch (Exception ex)
+                {
+                    // Log the error (you can use a logging framework here)
+                    Console.WriteLine(ex.Message);
+                    return RedirectToAction("Error");
+                }
             }
 
-            TempData["SuccessMessage"] = "Election created successfully!";
-            return RedirectToAction("ViewElections");
+            // If invalid, reload available candidates
+            model.AvailableCandidates = await _context.Candidates
+                .Select(c => new CandidateViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Party = c.Party,
+                    PhotoPath = c.PhotoPath
+                })
+                .ToListAsync();
+
+            return View(model);
         }
+
+
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CreateElection(CreateElectionViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            // Create the Election object
+        //            var election = new ElectionModel
+        //            {
+        //                Title = model.Title,
+        //                Description = model.Description,
+        //                StartDate = model.StartDate,
+        //                EndDate = model.EndDate
+        //            };
+
+        //            // Save the election to generate its ID
+        //            _context.Elections.Add(election);
+        //            await _context.SaveChangesAsync();
+
+        //            // Add selected candidates to the ElectionCandidates table
+        //            if (model.SelectedCandidateIds != null && model.SelectedCandidateIds.Any())
+        //            {
+        //                foreach (var candidateId in model.SelectedCandidateIds)
+        //                {
+        //                    var electionCandidate = new ElectionCandidate
+        //                    {
+        //                        ElectionId = election.Id,
+        //                        CandidateId = candidateId
+        //                    };
+        //                    _context.ElectionCandidates.Add(electionCandidate);
+        //                }
+
+        //                await _context.SaveChangesAsync();
+        //            }
+
+        //            TempData["SuccessMessage"] = "Election created successfully!";
+        //            return RedirectToAction("ViewElections");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Log the error (you can use a logging framework here)
+        //            Console.WriteLine(ex.Message);
+        //            return RedirectToAction("Error");
+        //        }
+        //    }
+
+        //    // If invalid, reload available candidates
+        //    model.AvailableCandidates = await _context.Candidates
+        //        .Select(c => new CandidateViewModel
+        //        {
+        //            Id = c.Id,
+        //            Name = c.Name,
+        //            Party = c.Party,
+        //            PhotoPath = c.PhotoPath
+        //        })
+        //        .ToListAsync();
+
+        //    return View(model);
+        //}
+
+
 
 
         //public async Task<IActionResult> EditElection(int id)
@@ -572,26 +877,26 @@ namespace Election.Controllers
         //    return View(election);
         //}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> EditElection(ElectionModel model)
-        //{
-        //    var election = await _context.Elections.FindAsync(model.Id);
-        //    if (election == null || DateTime.Now >= election.StartDate)
-        //    {
-        //        TempData["ErrorMessage"] = "Editing is not allowed for ongoing or ended elections.";
-        //        return RedirectToAction("ViewElections");
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditElection(ElectionModel model)
+        {
+            var election = await _context.Elections.FindAsync(model.Id);
+            if (election == null || DateTime.Now >= election.StartDate)
+            {
+                TempData["ErrorMessage"] = "Editing is not allowed for ongoing or ended elections.";
+                return RedirectToAction("ViewElections");
+            }
 
-        //    election.Title = model.Title;
-        //    election.Description = model.Description;
-        //    election.StartDate = model.StartDate;
-        //    election.EndDate = model.EndDate;
-        //    await _context.SaveChangesAsync();
+            election.Title = model.Title;
+            election.Description = model.Description;
+            election.StartDate = model.StartDate;
+            election.EndDate = model.EndDate;
+            await _context.SaveChangesAsync();
 
-        //    TempData["SuccessMessage"] = "Election updated successfully!";
-        //    return RedirectToAction("ViewElections");
-        //}
+            TempData["SuccessMessage"] = "Election updated successfully!";
+            return RedirectToAction("ViewElections");
+        }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -621,42 +926,22 @@ namespace Election.Controllers
 
 
 
-
-
-
-        //[HttpGet]
-        //public IActionResult CreateElection()
-        //{
-        //    return View(); // Show the CreateElection form
-        //}
-
-        //[HttpPost]
-        //public IActionResult CreateElection(ElectionModel election)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Elections.Add(election); // Save the new election
-        //        _context.SaveChanges();
-
-        //        TempData["SuccessMessage"] = "Election created successfully!";
-        //        return RedirectToAction("ListElections"); // Redirect to Manage Elections
-        //    }
-
-        //    TempData["ErrorMessage"] = "Failed to create election. Please check the details.";
-        //    return View(election); // Show the form again with errors
-        //}
-        [HttpGet]
-        public async Task<IActionResult> EditCandidate(int id)
+        [HttpPost]
+        public async Task<IActionResult> DeleteElection(int id)
         {
-            var candidate = await _context.Candidates.FindAsync(id);
-            if (candidate == null)
+            var election = await _context.Elections.FindAsync(id);
+            if (election == null || !election.HasEnded())
             {
-                TempData["ErrorMessage"] = "Candidate not found.";
-                return RedirectToAction("ManageCandidates");
+                return NotFound("Election not found or cannot be deleted.");
             }
 
-            return View(candidate);
+            _context.Elections.Remove(election);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ViewElections));
         }
+
+
+
 
 
 
@@ -769,56 +1054,58 @@ namespace Election.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult CreateCandidate()
+
+
+
+        public async Task<IActionResult> Vote(int electionId, int candidateId)
         {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCandidate(CreateCandidateViewModel model)
-        {
-            if (ModelState.IsValid)
+            var election = await _context.Elections
+                .Include(e => e.Candidates)
+                .FirstOrDefaultAsync(e => e.Id == electionId);
+
+            if (election == null)
             {
-                // Handle file upload logic
-                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", model.Photo?.FileName);
-
-                // Ensure the "images" folder exists
-                var directory = Path.GetDirectoryName(filePath);
-                if (!Directory.Exists(directory))
-                {
-                    Directory.CreateDirectory(directory); // Create the directory if it doesn't exist
-                }
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await model.Photo.CopyToAsync(stream);
-                }
-
-                var candidate = new Candidate
-                {
-                    Name = model.Name,
-                    Party = model.Party,
-                    Position = model.Position,
-                    Description = model.Description,
-                    PhotoPath = "/images/" + model.Photo.FileName // Save the path relative to wwwroot
-                };
-
-                _context.Candidates.Add(candidate);
-                await _context.SaveChangesAsync();
-
-                // Use TempData to display a success message
-                TempData["SuccessMessage"] = "Candidate created successfully.";
-
-                // Redirect to the candidates list page
-                return RedirectToAction("ManageCandidates");
+                return NotFound();
             }
 
-            // If the model is invalid, return the same view with validation errors
-            return View(model);
+            var candidate = await _context.Candidates
+                .FirstOrDefaultAsync(c => c.Id == candidateId);
+
+            if (candidate == null || election.Status != "Ongoing")
+            {
+                return NotFound();  // Make sure the election is ongoing before allowing voting
+            }
+
+            // Check if the user has already voted in this election
+            var existingVote = await _context.Vote
+                .FirstOrDefaultAsync(v => v.UserId == User.Identity.Name && v.ElectionId == electionId);
+
+            if (existingVote != null)
+            {
+                // The user has already voted, handle it accordingly (e.g., show a message)
+                return RedirectToAction("AlreadyVoted", new { electionId = electionId });
+            }
+
+            // Create a new vote
+            var vote = new Vote
+            {
+                ElectionId = electionId,
+                CandidateId = candidateId,
+                UserId = User.Identity.Name, // Assuming you have a UserId in your context
+                VoteDate = DateTime.Now
+            };
+
+            // Save the vote
+            _context.Vote.Add(vote);
+            await _context.SaveChangesAsync();
+
+            // Increment the candidate's vote count
+            candidate.Votes++;
+            _context.Candidates.Update(candidate);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ElectionDetails", new { electionId = electionId });
         }
-
-
 
 
         public async Task<IActionResult> Index()
@@ -826,7 +1113,7 @@ namespace Election.Controllers
             var elections = await _context.Elections
                                           .Where(e => e.StartDate <= DateTime.Now && e.EndDate >= DateTime.Now)
                                           .Include(e => e.ElectionCandidates)
-                                          .ThenInclude(ec => ec.Candidate) // Ensure Candidate is included in the ElectionCandidate relationship
+                                          .ThenInclude(ec => ec.Candidate)
                                           .ToListAsync();
 
             var viewModel = elections.Select(e => new ElectionVoteViewModel
@@ -841,23 +1128,9 @@ namespace Election.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Vote(int ElectionId, int CandidateId)
-        {
-            // Add logic to record the vote
-            var vote = new Vote
-            {
-                ElectionId = ElectionId,
-                CandidateId = CandidateId,
-                VoteDate = DateTime.Now
-            };
 
-            _context.Vote.Add(vote);
-            await _context.SaveChangesAsync();
 
-            TempData["Message"] = "Your vote has been recorded!";
-            return RedirectToAction("Index");
-        }
+
     }
 }
 

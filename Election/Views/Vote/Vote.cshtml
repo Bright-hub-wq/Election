@@ -1,0 +1,99 @@
+﻿
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span>Home</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
+
+
+
+ @model Election.ViewModel.VotingViewModel
+<!-- Display Success Message -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<style>
+    .candidate-card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 15px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .candidate-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+    .vote-btn {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 style="text-align:center;">@Model.ElectionTitle</h2>
+
+    <div class="row">
+        @foreach (var candidate in Model.Candidates)
+        {
+            <div class="col-md-4">
+                <div class="candidate-card">
+                    <img src="@candidate.PhotoPath" alt="@candidate.Name">
+                    <h4>@candidate.Name</h4>
+                    <p>@candidate.Party</p>
+                    <p>@candidate.Description</p>
+                    <form asp-action="Vote" method="post">
+                        <input type="hidden" name="CandidateId" value="@candidate.Id">
+                        <input type="hidden" name="ElectionId" value="@Model.ElectionId">
+                        <button type="submit" class="btn btn-primary vote-btn">Vote</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Auto-hide success message after 5 seconds
+            setTimeout(function () {
+                $(".alert-success").fadeOut("slow");
+            }, 5000); // 5000ms = 5 seconds
+        });
+    </script>
+}

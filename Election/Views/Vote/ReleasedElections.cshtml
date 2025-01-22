@@ -1,0 +1,61 @@
+﻿
+<style>
+    .navbar {
+        background-color: var(--primary);
+    }
+</style>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a class="navbar-brand" href="/">
+            <span style="color:white;">Home</span>
+        </a>
+    </div>
+    <div class="navbar-toggle" id="navbar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
+        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
+    </ul>
+</nav>
+<script>
+    // Toggle Navbar Menu
+    document.getElementById('navbar-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    });
+</script>
+
+
+
+@model List<Election.ViewModel.ElectionViewModel>
+
+@{
+    ViewData["Title"] = "Released Elections";
+}
+
+<h1 class="text-center">Released Elections</h1>
+
+@if (!Model.Any())
+{
+    <p class="text-center">No elections with released results are available.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var election in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">@election.Title</h5>
+                        <a asp-action="ViewWinner" asp-route-electionId="@election.Id" class="btn btn-primary">View Winner</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+

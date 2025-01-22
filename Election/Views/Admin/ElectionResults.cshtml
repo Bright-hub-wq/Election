@@ -1,0 +1,37 @@
+﻿@model List<Election.ViewModel.CandidateResultViewModel>
+
+@{
+    ViewData["Title"] = "Election Results";
+}
+
+<h1 style="text-align: center; margin-top: 20px;">Election Results</h1>
+
+@if (!Model.Any())
+{
+    <p style="text-align: center;">No candidates found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Candidate</th>
+                <th>Party</th>
+                <th>Vote Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var candidate in Model)
+            {
+                <tr class="@(Model.First() == candidate ? "table-success" : "")">
+                    <td>
+                        <img src="@candidate.Photopath" alt="@candidate.Name" style="width: 50px; height: 50px; border-radius: 50%;" />
+                        @candidate.Name
+                    </td>
+                    <td>@candidate.Party</td>
+                    <td>@candidate.VoteCount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
