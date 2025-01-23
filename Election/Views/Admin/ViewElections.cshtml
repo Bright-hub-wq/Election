@@ -125,7 +125,7 @@
 </div> *@
 
 
-
+@* 
 @model IEnumerable<Election.ViewModel.ElectionViewModel>
 
 <div class="table-responsive mt-4 mx-3">
@@ -192,9 +192,105 @@
             }
         </tbody>
     </table>
+</div> *@
+
+
+@model IEnumerable<Election.ViewModel.ElectionViewModel>
+
+<div class="table-responsive mt-4 mx-3">
+    <!-- Added mx-3 for horizontal margins -->
+    <table class="table table-bordered table-striped table-hover table-sm">
+        <thead class="">
+            <tr>
+                <th>Election Title</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Candidates</th>
+                <th>Party</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var election in Model)
+            {
+                <tr>
+                    <td>@election.Title</td>
+                    <td>
+                        @if (election.Description.Length > 100)
+                        {
+                            @election.Description.Substring(0, 100)
+                            
+                                                <button class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#electionDescriptionModal-@election.Id">Read More</button>
+                            }
+                            else
+                            {
+                    @election.Description
+                            }
+                </td>
+                <td>@election.StartDate.ToShortDateString()</td>
+                <td>@election.EndDate.ToShortDateString()</td>
+                <td>
+                    <span class="badge
+                            @(election.Status == "Ongoing" ? "bg-success" :
+                              election.Status == "Ended" ? "bg-danger" : "bg-warning")">
+                        @election.Status
+                    </span>
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                        @foreach (var candidate in election.Candidates)
+{
+                        <li class="d-flex align-items-center">
+                            <img src="@candidate.PhotoPath" alt="@candidate.Name" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                            @candidate.Name
+                        </li>
+}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                        @foreach (var candidate in election.Candidates)
+{
+                        <li>@candidate.Party</li>
+}
+                    </ul>
+                </td>
+                <td class="text-center">
+                    <form method="post" asp-action="DeleteElection" asp-route-id="@election.Id" style="display: inline-block;">
+                        <button type="submit" style="border-radius:0; padding:8px;" class="btn btn-danger btn-sm" @(election.Status != "Ended" ? "disabled" : "")>
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </form>
+                    <a href="@Url.Action("EditElection", new { id = election.Id })"
+                       style="border-radius:0; padding:8px;" class="btn btn-primary btn-sm @(election.Status != "Upcoming" ? "disabled" : "")">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+            </tr>
+
+            <!-- Modal for Full Description -->
+            <div class="modal fade" id="electionDescriptionModal-@election.Id" tabindex="-1" aria-labelledby="electionDescriptionModalLabel-@election.Id" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="electionDescriptionModalLabel-@election.Id">@election.Title - Full Description</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            @election.Description
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </tbody>
+    </table>
 </div>
-
-
 
 
 

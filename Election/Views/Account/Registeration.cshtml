@@ -184,7 +184,7 @@
             <div class="input-box">
                 <label for="Password">Password</label>
                 <input type="password" asp-for="Password" id="Password" placeholder="Enter password" required minlength="6" />
-                <span class="toggle-password" data-target="#Password">👁</span>
+               @*  <span class="toggle-password" data-target="#Password">👁</span> *@
                 <small class="text-muted">Password must be at least 6 characters long.</small>
             </div>
 
@@ -192,7 +192,7 @@
             <div class="input-box">
                 <label for="ConfirmPassword">Confirm Password</label>
                 <input type="password" asp-for="ConfirmPassword" id="ConfirmPassword" placeholder="Confirm password" required />
-                <span class="toggle-password" data-target="#ConfirmPassword">👁</span>
+                @* <span class="toggle-password" data-target="#ConfirmPassword">👁</span> *@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
 
@@ -283,31 +283,31 @@
                 } else {
                     $('#confirmPasswordError').text(""); // Clear error if they match
                 }
-            });
+            }); 
 
-            // Show/Hide password toggle
-            $('.toggle-password').on('click', function () {
-                let target = $($(this).data('target'));
-                let type = target.attr('type') === 'password' ? 'text' : 'password';
-                target.attr('type', type);
-                $(this).text(type === 'password' ? '👁' : '👁️‍🗨️');
-            });
+            // // Show/Hide password toggle
+            // $('.toggle-password').on('click', function () {
+            //     let target = $($(this).data('target'));
+            //     let type = target.attr('type') === 'password' ? 'text' : 'password';
+            //     target.attr('type', type);
+            //     $(this).text(type === 'password' ? '👁' : '👁️‍🗨️');
+            // });
         });
-    </script> *@
+    </script> *@ 
     <style>
         .input-box {
             position: relative;
             margin-bottom: 15px;
         }
 
-        .toggle-password {
+       /*  .toggle-password {
             position: absolute;
             top: 50%;
             right: 10px;
             transform: translateY(-50%);
             cursor: pointer;
             color: #707070;
-        }
+        } */
 
         .form-row {
             display: flex;

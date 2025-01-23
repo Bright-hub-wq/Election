@@ -180,6 +180,33 @@ namespace Election.Controllers
         //    return View();
         //}
 
+        //public IActionResult Index()
+        //{
+        //    var voterRoleId = _context.Roles.FirstOrDefault(r => r.Name == "Voter")?.Id;
+
+        //    if (voterRoleId == null)
+        //    {
+        //        return View(new List<ApplicationUserViewModel>()); // Empty list
+        //    }
+
+        //    var voters = (from user in _context.ApplicationUser
+        //                  join userRole in _context.UserRoles on user.Id equals userRole.UserId
+        //                  where userRole.RoleId == voterRoleId && !user.IsDeactivated
+        //                  select new ApplicationUserViewModel
+        //                  {
+        //                      UserId = user.Id,
+        //                      FirstName = user.FirstName,
+        //                      LastName = user.LastName,
+        //                      DateOfBirth = user.DateOfBirth,
+        //                      Email = user.Email,
+        //                      Gender = user.Gender
+        //                  }).ToList();
+
+        //    return View(voters);
+        //}
+
+
+
         public IActionResult Index()
         {
             var voterRoleId = _context.Roles.FirstOrDefault(r => r.Name == "Voter")?.Id;
@@ -195,15 +222,19 @@ namespace Election.Controllers
                           select new ApplicationUserViewModel
                           {
                               UserId = user.Id,
-                              FirstName = user.FirstName,
-                              LastName = user.LastName,
+                              FirstName = user.FirstName ?? "N/A", // Handle null FirstName
+                              LastName = user.LastName ?? "N/A",  // Handle null LastName
                               DateOfBirth = user.DateOfBirth,
                               Email = user.Email,
-                              Gender = user.Gender
+                              Gender = user.Gender ?? "Not Specified" // Handle null Gender
                           }).ToList();
 
             return View(voters);
         }
+
+
+
+
 
         public async Task<IActionResult> ViewElections()
         {

@@ -432,76 +432,75 @@
 
 
 
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <!-- Responsive grid with spacing -->
+        @foreach (var candidate in Model)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <!-- Ensure cards have equal height -->
+                    <div class="card-header p-0">
+                        <img src="@candidate.PhotoPath" alt="Candidate Photo" class="img-fluid" style="width: 100%; height: 200px; object-fit: cover;"> <!-- Consistent image size -->
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@candidate.Name</h5>
+                        <p class="card-text">
+                            <strong>Party:</strong> @candidate.Party<br>
+                            <strong>Position:</strong> @candidate.Position<br>
+                            <strong>Description:</strong>
+                            <span>
+                                @if (candidate.Description.Length > 100)
+                                {
+                                    @candidate.Description.Substring(0, 100)
+                                   
+                                            }
+                                else
+                                {
+                                    @candidate.Description
+                                }
+                            </span>
+                        </p>
 
+                        <!-- Display Read More button if description is too long -->
+                        @if (candidate.Description.Length > 100)
+                        {
+                            <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#candidateModal-@candidate.Id">Read More</button>
+                        }
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            <!-- Responsive grid with spacing -->
-            @foreach (var candidate in Model)
-            {
-                <div class="col">
-                    <div class="card h-100">
-                        <!-- Ensure cards have equal height -->
-                        <div class="card-header p-0">
-                            <img src="@candidate.PhotoPath" alt="Candidate Photo" class="img-fluid" style="width: 100%; height: 200px; object-fit: cover;"> <!-- Consistent image size -->
+                        @if (User.IsInRole("Admin")) // Only show for admins
+                        {
+                            <div class="d-flex justify-content-center mt-2">
+                                <a asp-controller="Admin" asp-action="EditCandidate" asp-route-id="@candidate.Id" class="btn btn-primary btn-sm mx-1">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a asp-controller="Admin" asp-action="DeleteCandidate" asp-route-id="@candidate.Id" class="btn btn-danger btn-sm mx-1">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Showing Full Description -->
+            <div class="modal fade" id="candidateModal-@candidate.Id" tabindex="-1" aria-labelledby="candidateModalLabel-@candidate.Id" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="candidateModalLabel-@candidate.Id">@candidate.Name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title text-center">@candidate.Name</h5>
-                            <p class="card-text">
-                                <strong>Party:</strong> @candidate.Party<br>
-                                <strong>Position:</strong> @candidate.Position<br>
-                                <strong>Description:</strong>
-                                <span>
-                                    @if (candidate.Description.Length > 100)
-                                    {
-                                        @candidate.Description.Substring(0, 100)
-                                        
-                                                    }
-                                    else
-                                    {
-                                        @candidate.Description
-                                    }
-                                </span>
-                            </p>
-
-                            <!-- Display Read More button if description is too long -->
-                            @if (candidate.Description.Length > 100)
-                            {
-                                <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#candidateModal-@candidate.Id">Read More</button>
-                            }
-
-                            @if (User.IsInRole("Admin")) // Only show for admins
-                            {
-                                <div class="d-flex justify-content-center mt-2">
-                                    <a asp-controller="Admin" asp-action="EditCandidate" asp-route-id="@candidate.Id" class="btn btn-primary btn-sm mx-1">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </a>
-                                    <a asp-controller="Admin" asp-action="DeleteCandidate" asp-route-id="@candidate.Id" class="btn btn-danger btn-sm mx-1">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </a>
-                                </div>
-                            }
+                        <div class="modal-body">
+                            @candidate.Description
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
-
-                <!-- Modal for Showing Full Description -->
-                <div class="modal fade" id="candidateModal-@candidate.Id" tabindex="-1" aria-labelledby="candidateModalLabel-@candidate.Id" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="candidateModalLabel-@candidate.Id">@candidate.Name</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                @candidate.Description
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+
+
 

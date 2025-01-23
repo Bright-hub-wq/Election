@@ -19,8 +19,10 @@ namespace Election.Models
         public DateTime StartDate { get; set; }
         public bool? IsResultReleased { get; set; } = false;
 
+
         // This will represent the status based on the current date
         public bool IsReleased { get; set; }
+
         public int? WinnerId { get; set; }
 
         public DateTime EndDate { get; set; }

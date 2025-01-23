@@ -123,27 +123,57 @@
         {
             <tr>
                 <td>
-                    @if (!string.IsNullOrEmpty(candidate.PhotoPath))
-                    {
-                        <img src="@candidate.PhotoPath" alt="@candidate.Name's photo" style="width: 50px; height: 50px;" />
-                    }
+                    <img src="@candidate.PhotoPath" alt="Candidate Photo" class="img-fluid" style="width: 50px; height: 50px; object-fit: cover;">
                 </td>
                 <td>@candidate.Name</td>
                 <td>@candidate.Party</td>
                 <td>@candidate.Position</td>
-                <td>@candidate.Description</td>
                 <td>
-                    <a asp-action="EditCandidate" asp-route-id="@candidate.Id" class="btn btn-primary" style="padding:6px 9px;">
-                        <i class="bi bi-pencil-square"></i>
-                    </a>
-                    <a asp-action="DeleteCandidate" asp-route-id="@candidate.Id" class="btn btn-danger" style="padding:6px 9px;"><i class="bi bi-trash-fill"></i></a>
-                </td>
-            </tr>
+                    @if (candidate.Description.Length > 100)
+                    {
+                        @candidate.Description.Substring(0, 100)
+                             <button class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#descriptionModal-@candidate.Id">Read More</button>
+                    }
+                    else
+                    {
+                @candidate.Description
+                    }
+            </td>
+            <td>
+                <a asp-controller="Admin" asp-action="EditCandidate" asp-route-id="@candidate.Id" class="btn btn-primary btn-sm" style="padding:10px 14px;">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a asp-controller="Admin" asp-action="DeleteCandidate" asp-route-id="@candidate.Id" class="btn btn-danger btn-sm" style="padding:10px 14px;">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+
+        <!-- Modal for Full Description -->
+        <div class="modal fade" id="descriptionModal-@candidate.Id" tabindex="-1" aria-labelledby="descriptionModalLabel-@candidate.Id" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="descriptionModalLabel-@candidate.Id">@candidate.Name - Full Description</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @candidate.Description
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         }
     </tbody>
 </table>
 
-<a asp-action="CreateCandidate" class="btn btn-primary" style="float:inline-end; margin-top:15px; margin-right:20px; padding:10px 10px;">Create New Candidate</a>
+<a asp-action="CreateCandidate" class="btn btn-primary" style="float:right; margin-top:15px; margin-right:20px; padding:10px 10px;">Create New Candidate</a>
+
+
+
 
 @* 
 

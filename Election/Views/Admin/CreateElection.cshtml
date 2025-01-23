@@ -1,4 +1,4 @@
-﻿@*  @model Election.Models.CreateElectionViewModel
+﻿ @model Election.Models.CreateElectionViewModel
 
 <style>
     .navbar {
@@ -75,49 +75,10 @@
     </form>
 </div>
 
- *@
 
 
-
- @model Election.Models.CreateElectionViewModel
-
-<style>
-    .navbar {
-        background-color: var(--primary);
-    }
-
-    .candidate-list img {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-        border-radius: 50%;
-    }
-</style>
-
-<nav class="navbar">
-    <div class="navbar-left">
-        <a class="navbar-brand" href="/">
-            <span style="color:white;">Home</span>
-        </a>
-    </div>
-    <div class="navbar-toggle" id="navbar-toggle">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </div>
-    <ul class="navbar-menu" id="navbar-menu">
-        <li class="navbar-item"><a href="/Admin/AdminDashBoard">DashBoard</a></li>
-        <li class="navbar-item"><a href="/Account/Login">Logout</a></li>
-    </ul>
-</nav>
-
-<script>
-    // Toggle Navbar Menu
-    document.getElementById('navbar-toggle').addEventListener('click', () => {
-        const menu = document.getElementById('navbar-menu');
-        menu.classList.toggle('active');
-    });
-</script>
+@* 
+@model Election.Models.CreateElectionViewModel
 
 <div class="container mt-4">
     <h2>Create Election</h2>
@@ -164,5 +125,5 @@
 
         <button type="submit" class="btn btn-primary">Create Election</button>
     </form>
-
 </div>
+ *@

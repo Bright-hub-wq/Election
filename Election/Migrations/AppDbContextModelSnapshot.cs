@@ -73,7 +73,7 @@ namespace Election.Migrations
 
                     b.HasIndex("ElectionId");
 
-                    b.ToTable("Candidates");
+                    b.ToTable("Candidates", (string)null);
                 });
 
             modelBuilder.Entity("Election.Models.Ballot", b =>
@@ -95,7 +95,7 @@ namespace Election.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ballot");
+                    b.ToTable("Ballot", (string)null);
                 });
 
             modelBuilder.Entity("Election.Models.ElectionCandidate", b =>
@@ -124,7 +124,7 @@ namespace Election.Migrations
 
                     b.HasIndex("ElectionId");
 
-                    b.ToTable("ElectionCandidates");
+                    b.ToTable("ElectionCandidates", (string)null);
                 });
 
             modelBuilder.Entity("Election.Models.ElectionModel", b =>
@@ -142,6 +142,9 @@ namespace Election.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
                     b.Property<bool>("IsReleased")
                         .HasColumnType("bit");
 
@@ -153,6 +156,9 @@ namespace Election.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -185,7 +191,7 @@ namespace Election.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Elections");
+                    b.ToTable("Elections", (string)null);
                 });
 
             modelBuilder.Entity("Election.Models.Vote", b =>
@@ -226,7 +232,7 @@ namespace Election.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Vote");
+                    b.ToTable("Vote", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

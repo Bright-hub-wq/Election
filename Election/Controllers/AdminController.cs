@@ -689,7 +689,6 @@ namespace Election.Controllers
             return View(model);
         }
 
-
         [HttpGet]
         public IActionResult CreateElection()
         {
@@ -790,68 +789,6 @@ namespace Election.Controllers
 
 
 
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> CreateElection(CreateElectionViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            // Create the Election object
-        //            var election = new ElectionModel
-        //            {
-        //                Title = model.Title,
-        //                Description = model.Description,
-        //                StartDate = model.StartDate,
-        //                EndDate = model.EndDate
-        //            };
-
-        //            // Save the election to generate its ID
-        //            _context.Elections.Add(election);
-        //            await _context.SaveChangesAsync();
-
-        //            // Add selected candidates to the ElectionCandidates table
-        //            if (model.SelectedCandidateIds != null && model.SelectedCandidateIds.Any())
-        //            {
-        //                foreach (var candidateId in model.SelectedCandidateIds)
-        //                {
-        //                    var electionCandidate = new ElectionCandidate
-        //                    {
-        //                        ElectionId = election.Id,
-        //                        CandidateId = candidateId
-        //                    };
-        //                    _context.ElectionCandidates.Add(electionCandidate);
-        //                }
-
-        //                await _context.SaveChangesAsync();
-        //            }
-
-        //            TempData["SuccessMessage"] = "Election created successfully!";
-        //            return RedirectToAction("ViewElections");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            // Log the error (you can use a logging framework here)
-        //            Console.WriteLine(ex.Message);
-        //            return RedirectToAction("Error");
-        //        }
-        //    }
-
-        //    // If invalid, reload available candidates
-        //    model.AvailableCandidates = await _context.Candidates
-        //        .Select(c => new CandidateViewModel
-        //        {
-        //            Id = c.Id,
-        //            Name = c.Name,
-        //            Party = c.Party,
-        //            PhotoPath = c.PhotoPath
-        //        })
-        //        .ToListAsync();
-
-        //    return View(model);
-        //}
 
 
 

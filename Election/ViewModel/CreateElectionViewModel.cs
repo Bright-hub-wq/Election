@@ -32,7 +32,6 @@ namespace Election.Models
         public DateTime EndDate { get; set; }
 
 
-        // List of available candidates to assign to this election
     }
 
 }
